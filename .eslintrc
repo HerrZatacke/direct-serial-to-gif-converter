@@ -1,0 +1,216 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "globals": {
+    "CONFIG": true
+  },
+  "rules": {
+    // Airbnb overwrites
+    "import/no-extraneous-dependencies": [
+      "off"
+    ],
+    "arrow-body-style": [
+      "error",
+      "as-needed"
+    ],
+    "linebreak-style": "off",
+    "react/jsx-indent": [
+      2
+    ],
+    "react/jsx-indent-props": [
+      2
+    ],
+    "react/forbid-prop-types": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "jsx-a11y/label-has-for": "off",
+    "react/no-array-index-key": "off",
+    "class-methods-use-this": "off",
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "warn",
+          "error",
+          "info"
+        ]
+      }
+    ],
+    "eol-last": "warn",
+    "no-alert": "warn",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true
+      }
+    ],
+    "padded-blocks": "off",
+    "no-prototype-builtins": "off",
+    "no-restricted-syntax": "off",
+    "max-len": [
+      "warn",
+      160,
+      {
+        "ignoreComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "one-var": [
+      "error",
+      {
+        "var": "never",
+        "let": "never",
+        "const": "never"
+      }
+    ],
+    "one-var-declaration-per-line": "off",
+    "comma-style": [
+      "error",
+      "last"
+    ],
+    "no-empty": "error",
+    "id-blacklist": [
+      "error",
+      "e",
+      "temp",
+      "_temp",
+      "foo",
+      "_foo"
+    ],
+    "brace-style": [
+      "error",
+      "1tbs"
+    ],
+    "no-unused-vars": "warn",
+    "no-mixed-spaces-and-tabs": "error",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 2,
+        "maxEOF": 2
+      }
+    ],
+    "no-mixed-operators": ["error", {
+      "groups": [
+        ["+", "-", "*", "/", "%", "**"],
+        ["&", "|", "^", "~", "<<", ">>", ">>>"],
+        ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+        ["&&", "||"],
+        ["in", "instanceof"]
+      ],
+      "allowSamePrecedence": true
+    }],
+    "no-multi-spaces": "warn",
+    "quotes": "warn",
+    "operator-linebreak": [
+      "error",
+      "after"
+    ],
+    "no-trailing-spaces": "warn",
+    "curly": [
+      "error",
+      "all"
+    ],
+    "semi": [
+      "warn",
+      "always"
+    ],
+    "indent": [
+      "warn",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "keyword-spacing": "warn",
+    "prefer-const": "warn",
+    "comma-spacing": "warn",
+    "import/no-webpack-loader-syntax": "off",
+    "no-implicit-globals": "error",
+    "no-undef": "error",
+    "no-restricted-globals": [
+      "error",
+      "addEventListener",
+      "blur",
+      "close",
+      "closed",
+      "clearInterval",
+      "clearTimeout",
+      "confirm",
+      "defaultStatus",
+      "event",
+      "external",
+      "defaultstatus",
+      "find",
+      "focus",
+      "frameElement",
+      "frames",
+      "getComputedStyle",
+      "history",
+      "innerHeight",
+      "innerWidth",
+      "length",
+      "location",
+      "locationbar",
+      "menubar",
+      "moveBy",
+      "moveTo",
+      "name",
+      "onblur",
+      "onerror",
+      "onfocus",
+      "onload",
+      "onresize",
+      "onunload",
+      "open",
+      "opener",
+      "opera",
+      "outerHeight",
+      "outerWidth",
+      "pageXOffset",
+      "pageYOffset",
+      "parent",
+      "print",
+      "removeEventListener",
+      "resizeBy",
+      "resizeTo",
+      "requestAnimationFrame",
+      "screen",
+      "screenLeft",
+      "screenTop",
+      "screenX",
+      "screenY",
+      "scroll",
+      "scrollbars",
+      "scrollBy",
+      "scrollTo",
+      "scrollX",
+      "scrollY",
+      "self",
+      "setInterval",
+      "setTimeout",
+      "status",
+      "statusbar",
+      "stop",
+      "toolbar",
+      "top"
+    ]
+  }
+}

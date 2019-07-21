@@ -1,0 +1,12 @@
+node_modules/
+out/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.eslintcache
+.node_repl_history
+.yarn-integrity
+.idea
+*.txp
