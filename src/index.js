@@ -6,7 +6,7 @@ const createGif = require('./createGif');
 // const colorMap = [/*' ',*/ '░', '▒', '▓', '█'];
 // const colorMap = ['█', '▓', '▒', '░'];
 
-fs.readFile(path.join(process.cwd(), 'dump.txp'), { encoding: 'utf8' }, (err, data) => {
+fs.readFile(path.join(process.cwd(), 'dump.txt'), { encoding: 'utf8' }, (err, data) => {
   if (err) {
     process.exit();
   }

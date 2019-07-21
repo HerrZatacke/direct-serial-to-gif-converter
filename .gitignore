@@ -9,4 +9,5 @@ yarn-error.log*
 .node_repl_history
 .yarn-integrity
 .idea
-*.txp
+*.txt
+config.json
