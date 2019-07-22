@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
-const SerialPort = require('serialport');
+const sanitizeFilename = require('sanitize-filename');
 const ImageParser = require('./ImageParser');
 const createGif = require('./createGif');
+const SerialPort = require('serialport');
 const { portConfig } = require('../config');
+const palettes = require('./palettes');
 
 const outDir = path.join(process.cwd(), 'out');
 // const pixelMap = [/*' ',*/ '░', '▒', '▓', '█'];
@@ -18,9 +20,14 @@ const imageParser = new ImageParser({
         return;
       }
       const filePath = path.join(outDir, `${hash}.gif`);
-      fs.writeFileSync(filePath, createGif(rawImage, {
-        scale: 2,
-      }));
+
+      palettes.forEach(({ name, palette }) => {
+        fs.writeFileSync(path.join(outDir, `${hash}_${sanitizeFilename(name)}.gif`), createGif(rawImage, {
+          scale: 4,
+          palette,
+        }));
+      });
+
       console.info(`${filePath} written.`);
     });
     // console.log(image);

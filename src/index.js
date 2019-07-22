@@ -1,8 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
+const sanitizeFilename = require('sanitize-filename');
 const ImageParser = require('./ImageParser');
 const createGif = require('./createGif');
+
+const palettes = require('./palettes');
 
 const outDir = path.join(process.cwd(), 'out');
 // const pixelMap = [/*' ',*/ '░', '▒', '▓', '█'];
@@ -20,9 +23,14 @@ fs.readFile(path.join(process.cwd(), 'dump.txt'), { encoding: 'utf8' }, (err, da
           process.exit();
           return;
         }
-        fs.writeFileSync(path.join(outDir, `${hash}.gif`), createGif(rawImage, {
-          scale: 200,
-        }));
+
+        palettes.forEach(({ name, palette }) => {
+          fs.writeFileSync(path.join(outDir, `${hash}_${sanitizeFilename(name)}.gif`), createGif(rawImage, {
+            scale: 4,
+            palette,
+          }));
+        });
+
       });
       // console.log(image);
     },
