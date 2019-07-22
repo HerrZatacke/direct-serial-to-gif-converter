@@ -1,10 +1,10 @@
-const transformImageValues = (image, colorMap) => {
-  return image
+const transformImageValues = (image, pixelMap) => (
+  image
     .map(line => (
       line.map(code => (
-        colorMap[code]
+        pixelMap[code]
       )).join('')
-    )).join('\n');
-};
+    )).join('\n')
+);
 
 module.exports = transformImageValues;

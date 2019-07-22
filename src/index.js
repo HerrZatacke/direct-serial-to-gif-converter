@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
+const mkdirp = require('mkdirp');
 const ImageParser = require('./ImageParser');
 const createGif = require('./createGif');
 
-// const colorMap = [/*' ',*/ '░', '▒', '▓', '█'];
-// const colorMap = ['█', '▓', '▒', '░'];
+const outDir = path.join(process.cwd(), 'out');
+// const pixelMap = [/*' ',*/ '░', '▒', '▓', '█'];
+// const pixelMap = ['█', '▓', '▒', '░'];
 
 fs.readFile(path.join(process.cwd(), 'dump.txt'), { encoding: 'utf8' }, (err, data) => {
   if (err) {
@@ -13,10 +15,18 @@ fs.readFile(path.join(process.cwd(), 'dump.txt'), { encoding: 'utf8' }, (err, da
 
   const imageParser = new ImageParser({
     onComplete: ({ rawImage, hash }) => {
-      fs.writeFileSync(path.join(process.cwd(), 'out', `${hash}.gif`), createGif(rawImage));
+      mkdirp(outDir, (error) => {
+        if (error) {
+          process.exit();
+          return;
+        }
+        fs.writeFileSync(path.join(outDir, `${hash}.gif`), createGif(rawImage, {
+          scale: 200,
+        }));
+      });
       // console.log(image);
     },
-    // colorMap: ['  ', '▄ ', '▀▄', '██'],
+    // pixelMap: ['  ', '▄ ', '▀▄', '██'],
   });
 
   const rawLines = data.split('\n');

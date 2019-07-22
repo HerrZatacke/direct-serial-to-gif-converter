@@ -1,23 +1,34 @@
 const fs = require('fs');
 const path = require('path');
+const mkdirp = require('mkdirp');
 const SerialPort = require('serialport');
 const ImageParser = require('./ImageParser');
 const createGif = require('./createGif');
 const { portConfig } = require('../config');
 
-// const colorMap = [/*' ',*/ '░', '▒', '▓', '█'];
-// const colorMap = ['█', '▓', '▒', '░'];
+const outDir = path.join(process.cwd(), 'out');
+// const pixelMap = [/*' ',*/ '░', '▒', '▓', '█'];
+// const pixelMap = ['█', '▓', '▒', '░'];
 
 const imageParser = new ImageParser({
   onComplete: ({ rawImage, hash }) => {
-    const filePath = path.join(process.cwd(), 'out', `${hash}.gif`);
-    fs.writeFileSync(filePath, createGif(rawImage));
-    console.info(`${filePath} written.`);
+    mkdirp(outDir, (error) => {
+      if (error) {
+        process.exit();
+        return;
+      }
+      const filePath = path.join(outDir, `${hash}.gif`);
+      fs.writeFileSync(filePath, createGif(rawImage, {
+        scale: 2,
+      }));
+      console.info(`${filePath} written.`);
+    });
+    // console.log(image);
   },
   // onRow: ({ row }) => {
   //   console.log(row);
   // },
-  // colorMap: ['  ', '▄ ', '▀▄', '██'],
+  // pixelMap: ['  ', '▄ ', '▀▄', '██'],
 });
 
 let port;

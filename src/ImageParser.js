@@ -54,7 +54,7 @@ class ImageParser {
 
     if (this.lines.length === 20) {
       const rawRow = getImageFromLines(this.lines);
-      const row = this.options.colorMap ? transformImageValues(rawRow, this.options.colorMap) : null;
+      const row = this.options.colorMap ? transformImageValues(rawRow, this.options.pixelMap) : null;
       this.lines = [];
       this.completeRawImage.push(...rawRow);
 
