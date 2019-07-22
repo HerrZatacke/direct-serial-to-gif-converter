@@ -1,4 +1,5 @@
 const palettes = [
+
   {
     name: 'Black & White',
     palette: [0xffffff, 0xaaaaaa, 0x555555, 0x000000],
@@ -94,7 +95,32 @@ const palettes = [
   {
     name: 'The starry knight',
     palette: [0xf5db37, 0x37cae5, 0x0f86b6, 0x123f77],
+  }, 
+  {
+    name: 'Purple Rain',
+    palette: [0xadfffc, 0x8570b2, 0xff0084, 0x68006a],
   },
+  {
+    name: 'CMYKeystone',
+	palette: [0xffff00, 0x0be8fd, 0xfb00fa, 0x373737],
+  },  
+  {
+    name: 'Virtual Boy 1985',
+	palette: [0xff0000, 0xdb0000, 0x520000, 0x000000],
+  },  
+  {
+    name: 'Azure Clouds',
+	palette: [0x47ff99, 0x32b66d, 0x124127, 0x000000],
+  }, 
+  {
+    name: 'Golden Elephant Curry',
+	palette: [0xff9c00, 0xc27600, 0x4f3000, 0x000000],
+  },
+  
+//  Copy line for NPP Color Picking from e.g. Photoshop:
+//  palette: [0x #000, 0x #000, 0x #000, 0x #000000],
+
 ];
+
 
 module.exports = palettes;
