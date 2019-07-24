@@ -115,6 +115,14 @@ const palettes = [
     name: 'Golden Elephant Curry',
     palette: ['#ff9c00', '#c27600', '#4f3000', '#000000'],
   },
+  {
+    name: 'Romero`s Garden',
+    palette: ['#EBC4AB', '#649a57', '#574431', '#323727'],
+  },
+  {
+    name: 'Knee-Deep in the Wood',
+    palette: ['#fffe6e', '#d5690f', '#3c3ca9', '#2C2410'],
+  },
 ].map(({ name, palette }) => {
   const convertedColors = palette.map(color => (
     // ensure correct hex string length
