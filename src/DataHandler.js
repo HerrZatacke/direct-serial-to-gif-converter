@@ -25,38 +25,30 @@ class DataHandler {
       delay: 8, // in 1/10th of a second
     });
 
-    mkdirp(this.rawDir, (error) => {
-      if (error) {
-        process.exit();
-        return;
-      }
-      this.rawWriteStream = fs.createWriteStream(path.join(this.rawDir, `${(new Date()).valueOf()}.txt`), {
-        flags: 'a',
-        encoding: 'utf8',
-      });
+    mkdirp.sync(this.rawDir);
+    this.rawWriteStream = fs.createWriteStream(path.join(this.rawDir, `${(new Date()).valueOf()}.txt`), {
+      flags: 'a',
+      encoding: 'utf8',
     });
 
     this.imageParser = new ImageParser({
       onComplete: ({ rawImage, hash }) => {
-        mkdirp(this.outDir, (error) => {
-          if (error) {
-            process.exit();
-            return;
-          }
 
-          palettes.forEach(({ name, palette }) => {
-            const imageBuffer = createGif(rawImage, {
-              scale: 4,
-              palette,
-            });
-
-            if (imageBuffer) {
-              fs.writeFileSync(path.join(this.outDir, `${hash}_${sanitizeFilename(name)}.gif`), imageBuffer);
-            }
+        palettes.forEach(({ name, palette }) => {
+          const imageBuffer = createGif(rawImage, {
+            scale: 4,
+            palette,
           });
 
-          this.gifAnimator.addFrame(rawImage);
+          const paletteDir = path.join(this.outDir, 'single', sanitizeFilename(name));
+
+          if (imageBuffer) {
+            mkdirp.sync(paletteDir);
+            fs.writeFileSync(path.join(paletteDir, `${hash}.gif`), imageBuffer);
+          }
+
         });
+        this.gifAnimator.addFrame(rawImage);
         // console.log(image);
       },
       // onRow: ({ row }) => {
@@ -74,15 +66,10 @@ class DataHandler {
   }
 
   done() {
-    mkdirp(this.animatedDir, (error) => {
-      if (error) {
-        process.exit();
-        return;
-      }
-      const { buffer, hash } = this.gifAnimator.finalize();
-      fs.writeFileSync(path.join(this.animatedDir, `${hash}.gif`), buffer);
-      process.exit();
-    });
+    mkdirp.sync(this.animatedDir);
+    const { buffer, hash } = this.gifAnimator.finalize();
+    fs.writeFileSync(path.join(this.animatedDir, `${hash}.gif`), buffer);
+    process.exit();
   }
 }
 
