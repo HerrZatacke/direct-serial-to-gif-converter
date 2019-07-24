@@ -12,6 +12,8 @@ class DataHandler {
   constructor() {
 
     this.outDir = path.join(process.cwd(), 'out');
+    this.animatedDir = path.join(this.outDir, 'animated');
+    this.rawDir = path.join(this.outDir, 'raw');
     // const pixelMap = [/*' ',*/ '░', '▒', '▓', '█'];
     // const pixelMap = ['█', '▓', '▒', '░'];
 
@@ -21,6 +23,17 @@ class DataHandler {
       scale: 4,
       palette: palettes[1].palette,
       delay: 8, // in 1/10th of a second
+    });
+
+    mkdirp(this.rawDir, (error) => {
+      if (error) {
+        process.exit();
+        return;
+      }
+      this.rawWriteStream = fs.createWriteStream(path.join(this.rawDir, 'raw.txt'), {
+        flags: 'a',
+        encoding: 'utf8',
+      });
     });
 
     this.imageParser = new ImageParser({
@@ -54,18 +67,20 @@ class DataHandler {
   }
 
   push(rawLines) {
+    rawLines.forEach((line) => {
+      this.rawWriteStream.write(`${line}\n`);
+    });
     this.imageParser.push(...rawLines);
   }
 
   done() {
-    const gifDir = path.join(this.outDir, 'animated');
-    mkdirp(gifDir, (error) => {
+    mkdirp(this.animatedDir, (error) => {
       if (error) {
         process.exit();
         return;
       }
       const { buffer, hash } = this.gifAnimator.finalize();
-      fs.writeFileSync(path.join(gifDir, `${hash}.gif`), buffer);
+      fs.writeFileSync(path.join(this.animatedDir, `${hash}.gif`), buffer);
       process.exit();
     });
   }
