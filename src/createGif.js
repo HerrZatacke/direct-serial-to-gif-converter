@@ -1,18 +1,5 @@
 const { GifWriter } = require('omggif');
-
-const scaleRawImage = (rawImage, factor) => {
-  const rows = [];
-
-  rawImage.forEach((row) => {
-    const pixels = [];
-    row.forEach((pixel) => {
-      pixels.push(...[...new Array(factor)].map(() => pixel));
-    });
-    rows.push(...[...new Array(factor)].map(() => [...pixels]));
-  });
-
-  return rows;
-};
+const scaleRawImage = require('./scaleRawImage');
 
 const createGif = (rawImage, { scale, palette }) => {
 
@@ -24,11 +11,16 @@ const createGif = (rawImage, { scale, palette }) => {
   const width = rawImage[0].length;
   const height = rawImage.length;
   const buf = Buffer.alloc(1024 * 1024);
-  const gifWriter = new GifWriter(buf, width, height);
 
-  gifWriter.addFrame(0, 0, width * options.scale, height * options.scale, [].concat(...scaleRawImage(rawImage, options.scale)), { palette: options.palette });
-
-  return buf.slice(0, gifWriter.end());
+  try {
+    const gifWriter = new GifWriter(buf, width, height);
+    gifWriter.addFrame(0, 0, width * options.scale, height * options.scale, [].concat(...scaleRawImage(rawImage, options.scale)), { palette: options.palette });
+    return buf.slice(0, gifWriter.end());
+  } catch (error) {
+    console.error(error.message);
+    console.error('Maybe received only a partial image?');
+    return null;
+  }
 };
 
 module.exports = createGif;
