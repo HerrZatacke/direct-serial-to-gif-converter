@@ -21,8 +21,8 @@ class DataHandler {
       width: 160,
       height: 144,
       scale: 4,
-      palette: palettes[1].palette,
-      delay: 8, // in 1/10th of a second
+      palette: palettes[0].palette,
+      delay: 12, // in 1/10th of a second
     });
 
     mkdirp.sync(this.rawDir);
