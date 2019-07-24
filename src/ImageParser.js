@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const getImageFromLines = require('./getImageFromLines');
 const transformImageValues = require('./transformImageValues');
+const chars = require('../res/chars');
 
 class ImageParser {
 
@@ -16,12 +17,19 @@ class ImageParser {
     this.completeRawImage = [];
     this.completeImage = '';
     this.rowIndex = 0;
+    this.nextTileIsCounter = false;
+    this.counter = 0;
   }
 
   push(line, ...args) {
 
     if (!line.startsWith('!') && !line.startsWith('#')) {
-      this.lines.push(line);
+      if (this.nextTileIsCounter === true) {
+        this.lines.push(chars[this.counter]);
+        this.nextTileIsCounter = false;
+      } else {
+        this.lines.push(line);
+      }
     } else {
       const command = line.startsWith('!') ? JSON.parse(line.slice(1).trim()) : {};
 
@@ -31,6 +39,7 @@ class ImageParser {
           this.completeRawImage = [];
           this.completeImage = '';
           this.rowIndex = 0;
+          this.nextTileIsCounter = true;
 
           this.options.onInit();
           break;
@@ -42,8 +51,9 @@ class ImageParser {
             this.options.onComplete({
               rawImage: this.completeRawImage,
               image: this.completeImage,
-              hash: hash.digest('hex'),
+              hash: `${this.counter}_${hash.digest('hex')}`,
             });
+            this.counter = (this.counter + 1) % chars.length;
           }
           break;
         default:
