@@ -1,125 +1,133 @@
 const palettes = [
   {
     name: 'Black & White',
-    palette: [0xffffff, 0xaaaaaa, 0x555555, 0x000000],
+    palette: ['#ffffff', '#aaaaaa', '#555555', '#000000'],
   },
   {
     name: 'Cyanide Blues',
-    palette: [0x9efbe3, 0x21aff5, 0x1e4793, 0x0e1e3d],
+    palette: ['#9efbe3', '#21aff5', '#1e4793', '#0e1e3d'],
   },
   {
     name: 'Audi Quattro Pikes Peak',
-    palette: [0xebeee7, 0x868779, 0xfa2b25, 0x2a201e],
+    palette: ['#ebeee7', '#868779', '#fa2b25', '#2a201e'],
   },
   {
     name: 'Waterfront Plaza',
-    palette: [0xcecece, 0x6f9edf, 0x42678e, 0x102533],
+    palette: ['#cecece', '#6f9edf', '#42678e', '#102533'],
   },
   {
     name: 'Childhood in Greenland',
-    palette: [0xd0d058, 0xa0a840, 0x708028, 0x405010],
+    palette: ['#d0d058', '#a0a840', '#708028', '#405010'],
   },
   {
     name: 'Waterfront Plaza',
-    palette: [0xcecece, 0x6f9edf, 0x42678e, 0x102533],
+    palette: ['#cecece', '#6f9edf', '#42678e', '#102533'],
   },
   {
     name: 'Rusted City Sign',
-    palette: [0xedb4a1, 0xa96868, 0x764462, 0x2c2137],
+    palette: ['#edb4a1', '#a96868', '#764462', '#2c2137'],
   },
   {
     name: 'Floyd Steinberg in Love',
-    palette: [0xeaf5fa, 0x5fb1f5, 0xd23c4e, 0x4c1c2d],
+    palette: ['#eaf5fa', '#5fb1f5', '#d23c4e', '#4c1c2d'],
   },
   {
     name: 'Space Haze Overload',
-    palette: [0xf8e3c4, 0xcc3495, 0x6b1fb1, 0x0b0630],
+    palette: ['#f8e3c4', '#cc3495', '#6b1fb1', '#0b0630'],
   },
   {
     name: 'The death of Yung Columbus',
-    palette: [0xb5ff32, 0xff2261, 0x462917, 0x1d1414],
+    palette: ['#b5ff32', '#ff2261', '#462917', '#1d1414'],
   },
   {
     name: 'Caramel Fudge Paranoia',
-    palette: [0xCF9255, 0xCF7163, 0xB01553, 0x3f1711],
+    palette: ['#CF9255', '#CF7163', '#B01553', '#3f1711'],
   },
   {
     name: 'Sunflower Holidays',
-    palette: [0xffff55, 0xff5555, 0x881400, 0x000000],
+    palette: ['#ffff55', '#ff5555', '#881400', '#000000'],
   },
   {
     name: 'Deep Haze Green',
-    palette: [0xA1D909, 0x467818, 0x27421F, 0x000000],
+    palette: ['#A1D909', '#467818', '#27421F', '#000000'],
   },
   {
     name: 'Youth Ikarus reloaded',
-    palette: [0xcef7f7, 0xf78e50, 0x9e0000, 0x1e0000],
+    palette: ['#cef7f7', '#f78e50', '#9e0000', '#1e0000'],
   },
   {
     name: 'Candy Cotton Tower Raid',
-    palette: [0xE6AEC4, 0xE65790, 0x8F0039, 0x380016],
+    palette: ['#E6AEC4', '#E65790', '#8F0039', '#380016'],
   },
   {
     name: 'Dune 2000 remastered',
-    palette: [0xFBF1CD, 0xc09e7d, 0x725441, 0x000000],
+    palette: ['#FBF1CD', '#c09e7d', '#725441', '#000000'],
   },
   {
     name: 'Super Hyper Mega Gameboy',
-    palette: [0xf7e7c6, 0xd68e49, 0xa63725, 0x331e50],
+    palette: ['#f7e7c6', '#d68e49', '#a63725', '#331e50'],
   },
   {
     name: 'Links late Awakening',
-    palette: [0xffffb5, 0x7bc67b, 0x6b8c42, 0x5a3921],
+    palette: ['#ffffb5', '#7bc67b', '#6b8c42', '#5a3921'],
   },
   {
     name: 'CGA Palette Crush 1',
-    palette: [0xffffff, 0x55ffff, 0xff55ff, 0x000000],
+    palette: ['#ffffff', '#55ffff', '#ff55ff', '#000000'],
   },
   {
     name: 'CGA Palette Crush 2',
-    palette: [0xffffff, 0x55FFFF, 0xFF5555, 0x000000],
+    palette: ['#ffffff', '#55FFFF', '#FF5555', '#000000'],
   },
   {
     name: 'Metroid Aran remixed',
-    palette: [0xaedf1e, 0x047e60, 0xb62558, 0x2c1700],
+    palette: ['#aedf1e', '#047e60', '#b62558', '#2c1700'],
   },
   {
     name: 'Starlit Memories',
-    palette: [0x869AD9, 0x6D53BD, 0x6F2096, 0x4F133F],
+    palette: ['#869AD9', '#6D53BD', '#6F2096', '#4F133F'],
   },
   {
     name: 'Drowning at night',
-    palette: [0xA9B0B3, 0x586164, 0x20293F, 0x030C22],
+    palette: ['#A9B0B3', '#586164', '#20293F', '#030C22'],
   },
   {
     name: 'The starry knight',
-    palette: [0xf5db37, 0x37cae5, 0x0f86b6, 0x123f77],
+    palette: ['#f5db37', '#37cae5', '#0f86b6', '#123f77'],
   },
   {
     name: 'Purple Rain',
-    palette: [0xadfffc, 0x8570b2, 0xff0084, 0x68006a],
+    palette: ['#adfffc', '#8570b2', '#ff0084', '#68006a'],
   },
   {
     name: 'CMYKeystone',
-    palette: [0xffff00, 0x0be8fd, 0xfb00fa, 0x373737],
+    palette: ['#ffff00', '#0be8fd', '#fb00fa', '#373737'],
   },
   {
     name: 'Virtual Boy 1985',
-    palette: [0xff0000, 0xdb0000, 0x520000, 0x000000],
+    palette: ['#ff0000', '#db0000', '#520000', '#000000'],
   },
   {
     name: 'Azure Clouds',
-    palette: [0x47ff99, 0x32b66d, 0x124127, 0x000000],
+    palette: ['#47ff99', '#32b66d', '#124127', '#000000'],
   },
   {
     name: 'Golden Elephant Curry',
-    palette: [0xff9c00, 0xc27600, 0x4f3000, 0x000000],
+    palette: ['#ff9c00', '#c27600', '#4f3000', '#000000'],
   },
+].map(({ name, palette }) => {
+  const convertedColors = palette.map(color => (
+    // ensure correct hex string length
+    color.length !== 7 ? null : parseInt(color.substring(1), 16)
+  ))
+    .filter(color => color !== null);
 
-//  Copy line for NPP Color Picking from e.g. Photoshop:
-//  palette: [0x #000, 0x #000, 0x #000, 0x #000000],
-
-];
-
+  // ensure 4 colors
+  return (convertedColors.length !== 4) ? null : {
+    name,
+    palette: convertedColors,
+  };
+})
+  .filter(Boolean);
 
 module.exports = palettes;
