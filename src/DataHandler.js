@@ -30,7 +30,7 @@ class DataHandler {
         process.exit();
         return;
       }
-      this.rawWriteStream = fs.createWriteStream(path.join(this.rawDir, 'raw.txt'), {
+      this.rawWriteStream = fs.createWriteStream(path.join(this.rawDir, `${(new Date()).valueOf()}.txt`), {
         flags: 'a',
         encoding: 'utf8',
       });
