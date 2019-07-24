@@ -123,6 +123,10 @@ const palettes = [
     name: 'Knee-Deep in the Wood',
     palette: ['#fffe6e', '#d5690f', '#3c3ca9', '#2C2410'],
   },
+  {
+    name: 'Dies ist meine Wassermelone',
+    palette: ['#ffdbcb', '#f27d7a', '#558429', '#222903'],
+  },
 ].map(({ name, palette }) => {
   const convertedColors = palette.map(color => (
     // ensure correct hex string length
