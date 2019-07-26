@@ -54,6 +54,7 @@ class DataHandler {
       // onRow: ({ row }) => {
       //   console.log(row);
       // },
+      // pixelMap: ['██', '▀▄', '▄ ', '  '],
       // pixelMap: ['  ', '▄ ', '▀▄', '██'],
     });
   }
