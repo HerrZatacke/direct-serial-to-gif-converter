@@ -53,7 +53,7 @@ class ImageParser {
               image: this.completeImage,
               hash: `${this.counter}_${hash.digest('hex')}`,
             });
-            this.counter = (this.counter + 1) % chars.length;
+            this.counter = (this.counter + 1) % 100;
           }
           break;
         default:
