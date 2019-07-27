@@ -25,7 +25,7 @@ class ImageParser {
 
     if (!line.startsWith('!') && !line.startsWith('#')) {
       if (this.nextTileIsCounter === true) {
-        this.lines.push(chars[this.counter]);
+        this.lines.push(chars(this.counter.toString(10)));
         this.nextTileIsCounter = false;
       } else {
         this.lines.push(line);

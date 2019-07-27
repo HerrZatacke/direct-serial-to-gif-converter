@@ -1,36 +1,69 @@
-const chars = [
-  'DD DD AA AA AA AA AA AA DD DD FF FF FF FF FF FF',
-  'DD DD AD AD AD AD AD AD DD DD FF FF FF FF FF FF',
-  'D9 D9 AE AE AD AD AB AB D8 D8 FF FF FF FF FF FF',
-  'D9 D9 AE AE A9 A9 AE AE D9 D9 FF FF FF FF FF FF',
-  'DD DD AB AB AB AB A8 A8 DE DE FF FF FF FF FF FF',
-  'D8 D8 AB AB A9 A9 AE AE D9 D9 FF FF FF FF FF FF',
-  'DC DC AB AB A9 A9 AA AA DD DD FF FF FF FF FF FF',
-  'D8 D8 AE AE AD AD AB AB DB DB FF FF FF FF FF FF',
-  'DD DD AA AA AD AD AA AA DD DD FF FF FF FF FF FF',
-  'DD DD AA AA AC AC AE AE D9 D9 FF FF FF FF FF FF',
-  'DD DD DA DA DA DA DA DA DD DD FF FF FF FF FF FF',
-  'DD DD DD DD DD DD DD DD DD DD FF FF FF FF FF FF',
-  'D9 D9 DE DE DD DD DB DB D8 D8 FF FF FF FF FF FF',
-  'D9 D9 DE DE D9 D9 DE DE D9 D9 FF FF FF FF FF FF',
-  'DD DD DB DB DB DB D8 D8 DE DE FF FF FF FF FF FF',
-  'D8 D8 DB DB D9 D9 DE DE D9 D9 FF FF FF FF FF FF',
-  'DC DC DB DB D9 D9 DA DA DD DD FF FF FF FF FF FF',
-  'D8 D8 DE DE DD DD DB DB DB DB FF FF FF FF FF FF',
-  'DD DD DA DA DD DD DA DA DD DD FF FF FF FF FF FF',
-  'DD DD DA DA DC DC DE DE D9 D9 FF FF FF FF FF FF',
-  '9D 9D EA EA DA DA BA BA 8D 8D FF FF FF FF FF FF',
-  '9D 9D ED ED DD DD BD BD 8D 8D FF FF FF FF FF FF',
-  '99 99 EE EE DD DD BB BB 88 88 FF FF FF FF FF FF',
-  '99 99 EE EE D9 D9 BE BE 89 89 FF FF FF FF FF FF',
-  '9D 9D EB EB DB DB B8 B8 8E 8E FF FF FF FF FF FF',
-  '98 98 EB EB D9 D9 BE BE 89 89 FF FF FF FF FF FF',
-  '9C 9C EB EB D9 D9 BA BA 8D 8D FF FF FF FF FF FF',
-  '98 98 EE EE DD DD BB BB 8B 8B FF FF FF FF FF FF',
-  '9D 9D EA EA DD DD BA BA 8D 8D FF FF FF FF FF FF',
-  '9D 9D EA EA DC DC BE BE 89 89 FF FF FF FF FF FF',
-  '9D 9D EA EA 9A 9A EA EA 9D 9D FF FF FF FF FF FF',
-  '9D 9D ED ED 9D 9D ED ED 9D 9D FF FF FF FF FF FF',
-];
+/* eslint-disable quote-props */
+const chars = {
+  '': '006666666600FFFF',
+  ' ': 'FFFFFFFFFFFFFFFF',
+  '0': 'FFDDAAAAAADDFFFF',
+  '1': 'FFDD99DDDDDDFFFF',
+  '2': 'FF99EEDDBB88FFFF',
+  '3': 'FF99EE99EE99FFFF',
+  '4': 'FFDDBBBB88EEFFFF',
+  '5': 'FF88BB99EE99FFFF',
+  '6': 'FFCCBB99AADDFFFF',
+  '7': 'FF88EEDDBBBBFFFF',
+  '8': 'FFDDAADDAADDFFFF',
+  '9': 'FFDDAACCEE99FFFF',
+  'a': 'FFDDAAAA88AAFFFF',
+  'b': 'FF99AA99AA99FFFF',
+  'c': 'FFCCBBBBBBCCFFFF',
+  'd': 'FF99AAAAAA99FFFF',
+  'e': 'FF88BB99BB88FFFF',
+  'f': 'FF88BB99BBBBFFFF',
+  'g': 'FFCCBBAAAACCFFFF',
+  'h': 'FFAAAA88AAAAFFFF',
+  'i': 'FF88DDDDDD88FFFF',
+  'j': 'FF99DDDDDDBBFFFF',
+  'k': 'FFAAAA99AAAAFFFF',
+  'l': 'FFBBBBBBBB88FFFF',
+  'm': 'FFAA888AAAAAFFFF',
+  'n': 'FFAA8A888AAAFFFF',
+  'o': 'FFDDAAAAAADDFFFF',
+  'p': 'FF99AA99BBBBFFFF',
+  'q': 'FFDDAAAAAACCFFFF',
+  'r': 'FF99AA99AAAAFFFF',
+  's': 'FFCCBBDDEE99FFFF',
+  't': 'FF88DDDDDDDDFFFF',
+  'u': 'FFAAAAAAAACCFFFF',
+  'v': 'FFAAAAAAAADDFFFF',
+  'w': 'FFAAAA8A88AAFFFF',
+  'x': 'FFAAAADDAAAAFFFF',
+  'y': 'FFAAAADDDDDDFFFF',
+  'z': 'FF88EEDDBB88FFFF',
+  'ä': 'AADDAAAA88AAFFFF',
+  'ö': 'AADDAAAAAADDFFFF',
+  'ü': 'AAAFAAAAAACCFFFF',
+  'ß': 'FF99AA99AA99BBFF',
+  '.': 'FFFFFFFFFFDDFFFF',
+  '!': 'DDDDDDDDFFDDFFFF',
+  '?': 'DDAAEEDDFFDDFFFF',
+  '-': 'FFFFFF88FFFFFFFF',
+  '_': 'FFFFFFFFFF88FFFF',
+};
 
-module.exports = chars;
+const getChars = (text) => {
+
+  // convert to array of strings if necessary
+  const textParts = [...text.toString(10).toLowerCase(), ' ', ' '];
+
+  const leftChar = textParts.shift();
+  const rightChar = textParts.shift();
+
+  const leftHex = chars[leftChar] || chars[''];
+  const rightHex = chars[rightChar] || chars[''];
+
+  return [...Array(16)]
+    .map((_, index) => (
+      `${leftHex[index]}${rightHex[index]}`
+    )).join(' ');
+};
+
+module.exports = getChars;
