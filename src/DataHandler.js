@@ -32,6 +32,7 @@ class DataHandler {
     });
 
     this.imageParser = new ImageParser({
+      printImageCount: false, // set to true for easier animation debugging?
       onComplete: ({ rawImage, hash }) => {
 
         palettes.forEach(({ name, palette }) => {

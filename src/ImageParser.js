@@ -11,6 +11,7 @@ class ImageParser {
       onInit: (() => {}),
       onComplete: (() => {}),
       onCommand: (() => {}),
+      printImageCount: false,
     }, options);
 
     this.lines = [];
@@ -39,7 +40,7 @@ class ImageParser {
           this.completeRawImage = [];
           this.completeImage = '';
           this.rowIndex = 0;
-          this.nextTileIsCounter = true;
+          this.nextTileIsCounter = this.options.printImageCount;
 
           this.options.onInit();
           break;
