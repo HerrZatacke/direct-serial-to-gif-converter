@@ -127,6 +127,10 @@ const palettes = [
     name: 'Dies ist meine Wassermelone',
     palette: ['#ffdbcb', '#f27d7a', '#558429', '#222903'],
   },
+  {
+    name: 'My Friend from Bavaria',
+    palette: ['#FEDA1B', '#DF7925', '#B60077', '#382977'],
+  },
 ].map(({ name, palette }) => {
   const convertedColors = palette.map(color => (
     // ensure correct hex string length
