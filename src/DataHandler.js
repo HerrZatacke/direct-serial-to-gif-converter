@@ -8,9 +8,10 @@ const GifAnimator = require('./GifAnimator');
 
 const palettes = require('./palettes');
 
+const spinChars = ['/', '-', '\\', '|'];
+
 class DataHandler {
   constructor() {
-
     this.outDir = path.join(process.cwd(), 'out');
     this.animatedDir = path.join(this.outDir, 'animated');
     this.rawDir = path.join(this.outDir, 'raw');
@@ -49,12 +50,16 @@ class DataHandler {
           }
 
         });
+        process.stdout.write(`${hash}.gif done\r\n`);
         this.gifAnimator.addFrame(rawImage);
         // console.log(image);
       },
-      // onRow: ({ row }) => {
-      //   console.log(row);
-      // },
+      onRow: ({ row }) => {
+        const spinChar = spinChars.pop();
+        process.stdout.write(`${spinChar}\r`);
+        spinChars.unshift(spinChar);
+        //   console.log(row);
+      },
       // pixelMap: ['██', '▀▄', '▄ ', '  '],
       // pixelMap: ['  ', '▄ ', '▀▄', '██'],
     });
