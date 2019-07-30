@@ -135,6 +135,10 @@ const palettes = [
     name: 'Flowerfeldstraße',
     palette: ['#e9d9cc', '#c5c5ce', '#75868f', '#171f62'],
   },
+  {
+    name: 'There\'s always money',
+    palette: ['#fdfe0a', '#fed638', '#977b25', '#221a09'],
+  },
 ].map(({ name, palette }) => {
   const convertedColors = palette.map(color => (
     // ensure correct hex string length
