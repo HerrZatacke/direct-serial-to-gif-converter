@@ -139,6 +139,10 @@ const palettes = [
     name: 'There\'s always money',
     palette: ['#fdfe0a', '#fed638', '#977b25', '#221a09'],
   },
+  {
+    name: 'Artistic Coffeinated Lactose',
+    palette: ['#fdfef5', '#dea963', '#9e754f', '#241606'],
+  },
 ].map(({ name, palette }) => {
   const convertedColors = palette.map(color => (
     // ensure correct hex string length
