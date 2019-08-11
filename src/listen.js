@@ -10,7 +10,7 @@ try {
     baudRate: portConfig.baudRate,
     dataBits: portConfig.dataBits,
     stopBits: portConfig.stopBits,
-    autoOpen: portConfig.autoOpen,
+    autoOpen: true,
     parity: portConfig.parity,
   });
 } catch (error) {
@@ -19,7 +19,7 @@ try {
 }
 
 port.on('open', () => {
-  console.info('port opened - waiting for data');
+  console.info('port opened - waiting for data\nTo correctly create animated files, disconnect the port before closing program');
 });
 
 port.on('error', (error) => {
@@ -27,10 +27,10 @@ port.on('error', (error) => {
 });
 
 port.on('close', () => {
+  console.info('port closed...');
   dataHandler.done();
 });
 
-let inactivityDelay = null;
 let data = '';
 port.on('readable', () => {
   data = `${data}${port.read().toString()}`;
@@ -41,13 +41,4 @@ port.on('readable', () => {
     data = rawLines.pop();
     dataHandler.push(rawLines);
   }
-
-  global.clearTimeout(inactivityDelay);
-  inactivityDelay = global.setTimeout(() => {
-    console.info('no data in the last 5s - quitting....');
-    port.close(() => {
-      console.info('port closed');
-    });
-  }, 5000);
-
 });
