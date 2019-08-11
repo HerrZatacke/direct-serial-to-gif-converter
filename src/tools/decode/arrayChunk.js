@@ -7,4 +7,4 @@ const arrayChunk = (array, chunkSize) => (
   )))
 );
 
-module.exports = arrayChunk;
+export default arrayChunk;

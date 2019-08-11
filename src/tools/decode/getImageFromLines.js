@@ -16,4 +16,4 @@ const getImageFromLines = (lines) => {
     .map(line => [].concat(...line));
 };
 
-module.exports = getImageFromLines;
+export default getImageFromLines;

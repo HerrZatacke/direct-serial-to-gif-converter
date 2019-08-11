@@ -79,4 +79,4 @@ class DataHandler {
   }
 }
 
-module.exports = DataHandler;
+export default DataHandler;

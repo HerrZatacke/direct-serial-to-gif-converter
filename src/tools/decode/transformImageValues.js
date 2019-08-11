@@ -14,4 +14,4 @@ const transformImageValues = (image, pixelMap) => (
     )).join('\n')
 );
 
-module.exports = transformImageValues;
+export default transformImageValues;

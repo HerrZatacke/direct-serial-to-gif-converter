@@ -24,4 +24,4 @@ const createGif = (rawImage, { scale, palette }) => {
   }
 };
 
-module.exports = createGif;
+export default createGif;

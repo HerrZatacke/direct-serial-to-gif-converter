@@ -71,4 +71,4 @@ class PortHandler {
   }
 }
 
-module.exports = PortHandler;
+export default PortHandler;

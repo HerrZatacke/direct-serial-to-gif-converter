@@ -61,4 +61,4 @@ class GifAnimator {
 
 }
 
-module.exports = GifAnimator;
+export default GifAnimator;

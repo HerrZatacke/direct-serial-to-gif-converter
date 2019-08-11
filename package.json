@@ -21,6 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "@serialport/parser-readline": "^2.0.2",
+    "deepmerge": "^4.0.0",
     "mkdirp": "^0.5.1",
     "nedb": "^1.8.0",
     "omggif": "^1.0.10",

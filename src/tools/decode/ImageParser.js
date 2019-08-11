@@ -78,4 +78,4 @@ class ImageParser {
   }
 }
 
-module.exports = ImageParser;
+export default ImageParser;

@@ -12,4 +12,4 @@ const scaleRawImage = (rawImage, factor) => {
   return rows;
 };
 
-module.exports = scaleRawImage;
+export default scaleRawImage;

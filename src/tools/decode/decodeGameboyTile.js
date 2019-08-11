@@ -23,4 +23,4 @@ const decodeGameboyTile = (rawBytes) => {
     });
 };
 
-module.exports = decodeGameboyTile;
+export default decodeGameboyTile;

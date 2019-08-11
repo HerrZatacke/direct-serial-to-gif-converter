@@ -7,10 +7,6 @@ const screen = blessed.screen({
   autoPadding: true,
   smartCSR: true,
 });
-const store = getStore();
-
-global.store = store;
-global.screen = screen;
 
 const focusNext = () => {
   const keyables = screen.keyable;
@@ -19,7 +15,10 @@ const focusNext = () => {
 };
 
 screen.key('C-c', () => process.exit(0));
-
 screen.key('tab', focusNext);
 
-initApp(store, screen);
+getStore().then((store) => {
+  global.store = store;
+  global.screen = screen;
+  initApp(store, screen);
+});

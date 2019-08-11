@@ -1,16 +1,18 @@
 import { applyMiddleware, compose, createStore } from 'redux';
-import persistState from './persistState';
+import PersistState from './persistState';
 import middleware from './middleware';
 import reducers from './reducers';
 
+const persistState = new PersistState();
+
 const enhancers = [
   applyMiddleware(middleware),
-  applyMiddleware(persistState),
+  applyMiddleware(persistState.getMiddleware()),
 ];
 
-const getStore = preloadedState => (
-  createStore(reducers, preloadedState, compose(...enhancers))
-);
+const getStore = () => persistState.getPreloadedState()
+  .then(preloadedState => (
+    createStore(reducers, preloadedState, compose(...enhancers))
+  ));
 
-
-module.exports = getStore;
+export default getStore;
