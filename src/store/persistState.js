@@ -15,8 +15,8 @@ class PeristState {
       next(action);
 
       if (
-        action.type === 'LINE_RECEIVED' ||
-        action.type === 'LOG_MESSAGE'
+        // Add further actions here when store needs persisting
+        action.type !== 'SET_CONFIG'
       ) {
         return;
       }

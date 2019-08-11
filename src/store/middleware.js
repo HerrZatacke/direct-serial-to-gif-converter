@@ -16,6 +16,9 @@ const middleware = (store) => {
       case 'OPEN_PORT':
         portHandler.openPort();
         break;
+      case 'PROBE_PORTS':
+        portHandler.probePorts();
+        break;
       default:
         break;
     }

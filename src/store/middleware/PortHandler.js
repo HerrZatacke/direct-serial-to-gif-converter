@@ -12,6 +12,23 @@ class PortHandler {
     this.port = null;
   }
 
+  probePorts() {
+    SerialPort.list((error, results) => {
+      if (error) {
+        this.dispatchFunc({
+          type: 'LOG_MESSAGE',
+          payload: error,
+        });
+        return;
+      }
+
+      this.dispatchFunc({
+        type: 'PORTS_AVAILABLE',
+        payload: results.map(({ comName }) => comName),
+      });
+    });
+  }
+
   openPort() {
     if (this.port) {
       this.dispatchFunc({

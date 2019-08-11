@@ -16,6 +16,16 @@ const App = ({ store, comName }) => (
       }}
     />
     <Console />
+    <Button
+      text="Probe Ports"
+      index={1}
+      onPress={() => {
+        store.dispatch({
+          type: 'PROBE_PORTS',
+        });
+      }}
+    />
+    <Console />
   </Provider>
 );
 
