@@ -1,5 +1,5 @@
 const SerialPort = require('serialport');
-const DataHandler = require('./DataHandler');
+const DataHandler = require('./tools/imageCreation/DataHandler');
 const { portConfig } = require('../config');
 
 const dataHandler = new DataHandler();

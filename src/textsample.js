@@ -1,4 +1,4 @@
-const DataHandler = require('./DataHandler');
+const DataHandler = require('./tools/imageCreation/DataHandler');
 
 const getChars = require('../res/chars');
 

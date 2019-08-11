@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const DataHandler = require('./DataHandler');
+const DataHandler = require('./tools/imageCreation/DataHandler');
 
 const dataHandler = new DataHandler();
 
