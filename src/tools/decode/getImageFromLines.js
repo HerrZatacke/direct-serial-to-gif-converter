@@ -1,6 +1,6 @@
-const decodeGameboyTile = require('./decodeGameboyTile');
-const arrayChunk = require('./arrayChunk');
-const arrayTranspose = require('./arrayTranspose');
+import decodeGameboyTile from './decodeGameboyTile';
+import arrayChunk from './arrayChunk';
+import arrayTranspose from './arrayTranspose';
 
 const getImageFromLines = (lines) => {
 

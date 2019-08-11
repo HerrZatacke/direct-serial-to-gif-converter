@@ -1,6 +1,6 @@
-const crypto = require('crypto');
-const { GifWriter } = require('omggif');
-const scaleRawImage = require('./scaleRawImage');
+import crypto from 'crypto';
+import { GifWriter } from 'omggif';
+import scaleRawImage from './scaleRawImage';
 
 class GifAnimator {
   constructor({

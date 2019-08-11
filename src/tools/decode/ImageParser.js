@@ -1,6 +1,6 @@
-const crypto = require('crypto');
-const getImageFromLines = require('./getImageFromLines');
-const transformImageValues = require('./transformImageValues');
+import crypto from 'crypto';
+import getImageFromLines from './getImageFromLines';
+import transformImageValues from './transformImageValues';
 
 class ImageParser {
 

@@ -1,5 +1,5 @@
-const { GifWriter } = require('omggif');
-const scaleRawImage = require('./scaleRawImage');
+import { GifWriter } from 'omggif';
+import scaleRawImage from './scaleRawImage';
 
 const createGif = (rawImage, { scale, palette }) => {
 

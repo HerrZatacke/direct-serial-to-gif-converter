@@ -1,12 +1,11 @@
-const fs = require('fs');
-const path = require('path');
-const mkdirp = require('mkdirp');
-const sanitizeFilename = require('sanitize-filename');
-const ImageParser = require('../decode/ImageParser');
-const createGif = require('./createGif');
-const GifAnimator = require('./GifAnimator');
-
-const palettes = require('../../../res/palettes');
+import fs from 'fs';
+import path from 'path';
+import mkdirp from 'mkdirp';
+import sanitizeFilename from 'sanitize-filename';
+import ImageParser from '../decode/ImageParser';
+import createGif from './createGif';
+import GifAnimator from './GifAnimator';
+import palettes from '../../../res/palettes';
 
 const spinChars = ['/', '-', '\\', '|'];
 

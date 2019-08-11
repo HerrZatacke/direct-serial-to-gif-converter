@@ -1,4 +1,4 @@
-const PortHandler = require('../store/middleware/PortHandler');
+import PortHandler from '../store/middleware/PortHandler';
 
 const middleware = (store) => {
 
