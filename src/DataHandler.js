@@ -6,7 +6,7 @@ const ImageParser = require('./tools/decode/ImageParser');
 const createGif = require('./createGif');
 const GifAnimator = require('./GifAnimator');
 
-const palettes = require('./palettes');
+const palettes = require('../res/palettes');
 
 const spinChars = ['/', '-', '\\', '|'];
 
