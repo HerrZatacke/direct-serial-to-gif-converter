@@ -1,11 +1,10 @@
 import PortHandler from '../tools/serial/PortHandler';
 import saveRawImage from './middleware/saveRawImage';
-// import ImageParser from '../tools/decode/ImageParser';
+import getImageFromLines from '../tools/decode/getImageFromLines';
 
 const middleware = (store) => {
 
   const portHandler = new PortHandler(store.dispatch);
-  // const imageParser = new ImageParser(store.dispatch);
 
   return next => (action) => {
 
@@ -37,7 +36,11 @@ const middleware = (store) => {
         });
         break;
       case 'RAW_IMAGE_COMPLETE':
-        saveRawImage(action.payload);
+        saveRawImage(action.payload)
+          .then((filename) => {
+            console.log(`${filename} created.`);
+            console.log(getImageFromLines(action.payload));
+          });
         break;
       default:
         break;
