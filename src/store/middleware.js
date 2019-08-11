@@ -6,7 +6,7 @@ const middleware = (store) => {
 
   return next => (action) => {
 
-    // const state = store.getState();
+    const state = store.getState();
     // console.log(state);
 
     // eslint-disable-next-line no-console
@@ -14,7 +14,7 @@ const middleware = (store) => {
 
     switch (action.type) {
       case 'OPEN_PORT':
-        portHandler.openPort();
+        portHandler.openPort(state.config.portConfig);
         break;
       case 'PROBE_PORTS':
         portHandler.probePorts();

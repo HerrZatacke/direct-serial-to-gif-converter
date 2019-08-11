@@ -2,13 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import SerialPort from 'serialport';
 import Readline from '@serialport/parser-readline';
-// eslint-disable-next-line import/extensions
-import { portConfig } from '../../../config';
 
 class PortHandler {
   constructor(dispatch) {
     this.dispatchFunc = dispatch;
-    this.portConfig = portConfig;
     this.port = null;
   }
 
@@ -29,7 +26,7 @@ class PortHandler {
     });
   }
 
-  openPort() {
+  openPort(portConfig) {
     if (this.port) {
       this.dispatchFunc({
         type: 'LOG_MESSAGE',
@@ -39,11 +36,11 @@ class PortHandler {
     }
 
     try {
-      this.port = new SerialPort(this.portConfig.comName, {
-        baudRate: this.portConfig.baudRate,
-        dataBits: this.portConfig.dataBits,
-        stopBits: this.portConfig.stopBits,
-        parity: this.portConfig.parity,
+      this.port = new SerialPort(portConfig.comName, {
+        baudRate: portConfig.baudRate,
+        dataBits: portConfig.dataBits,
+        stopBits: portConfig.stopBits,
+        parity: portConfig.parity,
         autoOpen: true,
       });
     } catch (error) {
