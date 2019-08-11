@@ -30,7 +30,7 @@ class PortHandler {
     if (this.port) {
       this.dispatchFunc({
         type: 'LOG_MESSAGE',
-        payload: 'Port already defined',
+        payload: 'Port already opened',
       });
       return;
     }

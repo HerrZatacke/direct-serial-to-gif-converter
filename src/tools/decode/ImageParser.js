@@ -1,22 +1,12 @@
-import crypto from 'crypto';
 import getImageFromLines from './getImageFromLines';
-import transformImageValues from './transformImageValues';
 
 class ImageParser {
 
-  constructor(options) {
-    this.options = Object.assign({
-      onRow: (() => {}),
-      onInit: (() => {}),
-      onComplete: (() => {}),
-      onCommand: (() => {}),
-    }, options);
-
+  constructor(dispatchFunction) {
+    this.dispatchFunction = dispatchFunction;
     this.lines = [];
     this.completeRawImage = [];
-    this.completeImage = '';
     this.rowIndex = 0;
-    this.counter = 0;
   }
 
   push(line, ...args) {
@@ -30,45 +20,30 @@ class ImageParser {
         case 'INIT':
           this.lines = [];
           this.completeRawImage = [];
-          this.completeImage = '';
           this.rowIndex = 0;
-
-          this.options.onInit();
           break;
         case 'DATA':
           if (!command.more) {
-            const hash = crypto.createHash('sha1');
-            hash.update(this.completeRawImage.join(''));
-
-            this.options.onComplete({
-              rawImage: this.completeRawImage,
-              image: this.completeImage,
-              hash: `${this.counter}_${hash.digest('hex')}`,
+            this.dispatchFunction({
+              type: 'IMAGE_COMPLETE',
+              payload: this.completeRawImage,
             });
-            this.counter = (this.counter + 1) % 100;
           }
           break;
         default:
       }
-
-      this.options.onCommand(command);
     }
 
     if (this.lines.length === 20) {
       const rawRow = getImageFromLines(this.lines);
-      const row = this.options.pixelMap ? transformImageValues(rawRow, this.options.pixelMap) : null;
       this.lines = [];
       this.completeRawImage.push(...rawRow);
 
-      if (row && row.length) {
-        this.completeImage = `${this.completeImage}\n${row}`;
-      }
-
-      this.options.onRow({
-        rowIndex: this.rowIndex,
-        row,
-        rawRow,
+      this.dispatchFunction({
+        type: 'IMAGE_ROW',
+        payload: this.rowIndex,
       });
+
       this.rowIndex += 1;
     }
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import Button from '../Button';
 import Console from '../Console';
+import Progress from '../Progress';
 
 const App = ({ store, comName }) => (
   <Provider store={store}>
@@ -25,6 +26,7 @@ const App = ({ store, comName }) => (
         });
       }}
     />
+    <Progress />
     <Console />
   </Provider>
 );

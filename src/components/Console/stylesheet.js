@@ -1,5 +1,5 @@
 const stylesheet = {
-  height: '10%',
+  height: 7,
   bottom: 2,
   label: 'Messages',
   border: {
