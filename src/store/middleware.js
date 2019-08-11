@@ -1,10 +1,11 @@
 import PortHandler from '../tools/serial/PortHandler';
-import ImageParser from '../tools/decode/ImageParser';
+import saveRawImage from './middleware/saveRawImage';
+// import ImageParser from '../tools/decode/ImageParser';
 
 const middleware = (store) => {
 
   const portHandler = new PortHandler(store.dispatch);
-  const imageParser = new ImageParser(store.dispatch);
+  // const imageParser = new ImageParser(store.dispatch);
 
   return next => (action) => {
 
@@ -12,8 +13,7 @@ const middleware = (store) => {
     // console.log(state);
 
     if (
-      action.type !== 'LINE_RECEIVED' &&
-      action.type !== 'IMAGE_ROW'
+      action.type !== 'LINE_RECEIVED'
     ) {
       // eslint-disable-next-line no-console
       console.log(action);
@@ -36,8 +36,8 @@ const middleware = (store) => {
           },
         });
         break;
-      case 'LINE_RECEIVED':
-        imageParser.push(action.payload);
+      case 'RAW_IMAGE_COMPLETE':
+        saveRawImage(action.payload);
         break;
       default:
         break;

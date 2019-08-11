@@ -1,9 +1,9 @@
 const linesReducer = (line = '', action) => {
   switch (action.type) {
-    case 'IMAGE_ROW':
+    case 'LINE_RECEIVED':
       return action.payload;
-    case 'IMAGE_COMPLETE':
-      return 18;
+    case 'RAW_IMAGE_COMPLETE':
+      return 360;
     default:
       return line;
   }

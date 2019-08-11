@@ -25,7 +25,7 @@ class ImageParser {
         case 'DATA':
           if (!command.more) {
             this.dispatchFunction({
-              type: 'IMAGE_COMPLETE',
+              type: '__IMAGE_COMPLETE',
               payload: this.completeRawImage,
             });
           }
@@ -38,12 +38,6 @@ class ImageParser {
       const rawRow = getImageFromLines(this.lines);
       this.lines = [];
       this.completeRawImage.push(...rawRow);
-
-      this.dispatchFunction({
-        type: 'IMAGE_ROW',
-        payload: this.rowIndex,
-      });
-
       this.rowIndex += 1;
     }
 

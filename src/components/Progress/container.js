@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
-  value: state.lines * 100 / 18,
+  value: state.lines * 100 / 360,
 });
 
 const mapDispatchToProps = () => ({

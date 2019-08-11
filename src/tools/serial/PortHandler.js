@@ -2,24 +2,27 @@ import fs from 'fs';
 import path from 'path';
 import SerialPort from 'serialport';
 import Readline from '@serialport/parser-readline';
+import getImageFromLines from '../decode/getImageFromLines';
 
 class PortHandler {
   constructor(dispatch) {
-    this.dispatchFunc = dispatch;
+    this.dispatchFunction = dispatch;
     this.port = null;
+    this.lines = [];
+    this.lineCount = 0;
   }
 
   probePorts() {
     SerialPort.list((error, results) => {
       if (error) {
-        this.dispatchFunc({
+        this.dispatchFunction({
           type: 'LOG_MESSAGE',
           payload: error,
         });
         return;
       }
 
-      this.dispatchFunc({
+      this.dispatchFunction({
         type: 'PORTS_AVAILABLE',
         payload: results.map(({ comName }) => comName),
       });
@@ -28,7 +31,7 @@ class PortHandler {
 
   openPort(portConfig) {
     if (this.port) {
-      this.dispatchFunc({
+      this.dispatchFunction({
         type: 'LOG_MESSAGE',
         payload: 'Port already opened',
       });
@@ -49,7 +52,7 @@ class PortHandler {
     }
 
     this.port.on('open', () => {
-      this.dispatchFunc({
+      this.dispatchFunction({
         type: 'LOG_MESSAGE',
         payload: 'Port opened',
       });
@@ -57,7 +60,7 @@ class PortHandler {
 
     this.port.on('error', (error) => {
       this.port = null;
-      this.dispatchFunc({
+      this.dispatchFunction({
         type: 'LOG_MESSAGE',
         payload: `Port Error: ${error.message}`,
       });
@@ -65,7 +68,7 @@ class PortHandler {
 
     this.port.on('close', () => {
       this.port = null;
-      this.dispatchFunc({
+      this.dispatchFunction({
         type: 'LOG_MESSAGE',
         payload: 'Port closed',
       });
@@ -75,15 +78,39 @@ class PortHandler {
     const out = fs.createWriteStream(path.join(process.cwd(), 'out.txt'), { flags: 'a' });
 
     parser.on('data', (line) => {
-
       out.write(`${line}\n`);
-
-      this.dispatchFunc({
-        type: 'LINE_RECEIVED',
-        payload: line,
-      });
+      this.handleLine(line);
     });
+  }
 
+  handleLine(line) {
+
+    if (!line.startsWith('!') && !line.startsWith('#')) {
+      this.lines.push(line.replace(/[^0-9A-F]/ig, ''));
+    } else {
+      const command = line.startsWith('!') ? JSON.parse(line.slice(1).trim()) : {};
+
+      switch (command.command) {
+        case 'INIT':
+          this.lines = [];
+          break;
+        case 'DATA':
+          if (!command.more) {
+            this.dispatchFunction({
+              type: 'RAW_IMAGE_COMPLETE',
+              payload: this.lines,
+            });
+          }
+          break;
+        default:
+      }
+      return;
+    }
+
+    this.dispatchFunction({
+      type: 'LINE_RECEIVED',
+      payload: this.lines.length,
+    });
   }
 }
 
