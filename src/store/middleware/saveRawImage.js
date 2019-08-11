@@ -8,14 +8,18 @@ const rawDir = path.join(process.cwd(), 'out', 'raw');
 const saveRawImage = imageData => (
   new Promise((resolve, reject) => {
     const image = imageData.join('\n');
-    const hash = crypto.createHash('sha1');
-    hash.update(image);
+    const hasher = crypto.createHash('sha1');
+    hasher.update(image);
+    const hash = hasher.digest('hex');
 
     try {
       mkdirp.sync(path.join(rawDir));
-      const filename = path.join(rawDir, `${hash.digest('hex')}.txt`);
+      const filename = path.join(rawDir, `${hash}.txt`);
       fs.writeFileSync(filename, image);
-      resolve(filename);
+      resolve({
+        filename,
+        hash,
+      });
     } catch (error) {
       reject(error);
     }

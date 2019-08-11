@@ -1,7 +1,7 @@
 import { GifWriter } from 'omggif';
 import scaleRawImage from './scaleRawImage';
 
-const createGif = (rawImage, { scale, palette }) => {
+const createGif = (rawImage, { scale = 1, palette } = {}) => {
 
   const options = {
     scale: Math.min(16, Math.max(1, scale ? Math.ceil(scale) : 1)),
