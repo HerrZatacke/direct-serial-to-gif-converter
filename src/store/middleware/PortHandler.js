@@ -42,6 +42,7 @@ class PortHandler {
     });
 
     this.port.on('error', (error) => {
+      this.port = null;
       this.dispatchFunc({
         type: 'LOG_MESSAGE',
         payload: `Port Error: ${error.message}`,
@@ -49,6 +50,7 @@ class PortHandler {
     });
 
     this.port.on('close', () => {
+      this.port = null;
       this.dispatchFunc({
         type: 'LOG_MESSAGE',
         payload: 'Port closed',
