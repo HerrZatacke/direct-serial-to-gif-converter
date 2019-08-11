@@ -19,6 +19,16 @@ const middleware = (store) => {
       case 'PROBE_PORTS':
         portHandler.probePorts();
         break;
+      case 'PORTS_AVAILABLE':
+        store.dispatch({
+          type: 'SET_CONFIG',
+          payload: {
+            portConfig: {
+              comName: action.payload[0] || '',
+            },
+          },
+        });
+        break;
       default:
         break;
     }
