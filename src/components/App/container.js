@@ -1,7 +1,18 @@
 import { connect } from 'react-redux';
 
-const mapStateToProps = () => ({
-});
+const mapStateToProps = (state) => {
+  let comName;
+
+  try {
+    // eslint-disable-next-line prefer-destructuring
+    comName = state.config.portConfig.comName;
+  } catch (err) {
+    comName = '';
+  }
+  return ({
+    comName,
+  });
+};
 
 const mapDispatchToProps = () => ({
 });

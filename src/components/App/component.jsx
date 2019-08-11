@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';
 import Button from '../Button';
 import Console from '../Console';
 
-const App = ({ store }) => (
+const App = ({ store, comName }) => (
   <Provider store={store}>
     <Button
-      text="el boton"
+      text={`Open Port (${comName})`}
       index={0}
       onPress={() => {
         store.dispatch({
@@ -21,6 +21,7 @@ const App = ({ store }) => (
 
 App.propTypes = {
   store: PropTypes.object.isRequired,
+  comName: PropTypes.string.isRequired,
 };
 
 export default App;

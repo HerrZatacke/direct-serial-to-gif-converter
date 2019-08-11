@@ -14,7 +14,10 @@ class PeristState {
     this.middleware = store => next => (action) => {
       next(action);
 
-      if (action.type === 'LOG_MESSAGE') {
+      if (
+        action.type === 'LINE_RECEIVED' ||
+        action.type === 'LOG_MESSAGE'
+      ) {
         return;
       }
 

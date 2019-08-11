@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 
-const mapStateToProps = (state, ownProps) => ({
-  text: `${ownProps.text} ${state.line}`,
+const mapStateToProps = () => ({
 });
 
 const mapDispatchToProps = () => ({
