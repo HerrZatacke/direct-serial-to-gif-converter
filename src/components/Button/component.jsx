@@ -9,11 +9,9 @@ const Button = ({ text, index, onPress }) => (
     keys
     class={stylesheet}
     onPress={onPress}
-  >
-    {text}
-  </button>
+    content={text}
+  />
 );
-
 
 Button.propTypes = {
   index: PropTypes.number.isRequired,

@@ -1,33 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import Button from '../Button';
 import ComSettings from '../ComSettings';
 import Console from '../Console';
+import MainMenu from '../MainMenu';
 import Progress from '../Progress';
 
-const App = ({ store, portConfig }) => (
+const App = ({ store }) => (
   <Provider store={store}>
-    { portConfig.comName ? (
-      <Button
-        text={`Open Port (${portConfig.comName}, ${portConfig.baudRate}, ${portConfig.dataBits}, ${portConfig.stopBits}, ${portConfig.parity})`}
-        index={5}
-        onPress={() => {
-          store.dispatch({
-            type: 'OPEN_PORT',
-          });
-        }}
-      />
-    ) : null}
     <ComSettings />
     <Progress />
     <Console />
+    <MainMenu />
   </Provider>
 );
 
 App.propTypes = {
   store: PropTypes.object.isRequired,
-  portConfig: PropTypes.object.isRequired,
 };
 
 export default App;
