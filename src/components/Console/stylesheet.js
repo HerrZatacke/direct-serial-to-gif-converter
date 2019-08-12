@@ -1,14 +1,21 @@
 const stylesheet = {
-  height: 7,
-  bottom: 2,
-  label: 'Messages',
+  height: '80%',
+  width: '40%',
+  right: 0,
+  label: 'Log',
   border: {
     type: 'line',
   },
   style: {
-    fg: '#ff0000',
+    bg: '#0000ff',
+    fg: '#00ffff',
     border: {
-      fg: '#ff0000',
+      bg: '#0000ff',
+      fg: '#00ffff',
+    },
+    label: {
+      bg: '#0000ff',
+      fg: '#ffffff',
     },
   },
 };

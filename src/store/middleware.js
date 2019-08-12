@@ -29,19 +29,13 @@ const middleware = (store) => {
       case 'LIST_PORTS':
         portHandler.listPorts();
         break;
-      case 'PORTS_AVAILABLE':
-        store.dispatch({
-          type: 'SET_CONFIG',
-          payload: {
-            portConfig: {
-              comName: action.payload[0] || '',
-            },
-          },
-        });
-        break;
-      case 'RAW_IMAGE_COMPLETE':
+        case 'RAW_IMAGE_COMPLETE':
         saveRawImage(action.payload)
-          .then(({ hash }) => {
+          .then(({ filename, hash }) => {
+            store.dispatch({
+              type: 'LOG_MESSAGE',
+              payload: `${path.basename(filename)} created`,
+            });
 
             // throw a gif into the raw folder, just to have somethiong to look at...
             const tmpFile = path.join(process.cwd(), 'out', 'raw', `${hash}.gif`);

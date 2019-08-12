@@ -13,6 +13,10 @@ const initApp = (store, screen) => {
     });
   });
 
+  screen.key(['f1', 'f2'], (_, key) => {
+    console.log(key);
+  });
+
   render(<App store={store} />, screen);
 };
 

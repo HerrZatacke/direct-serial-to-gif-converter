@@ -11,7 +11,7 @@ const App = ({ store, portConfig }) => (
     { portConfig.comName ? (
       <Button
         text={`Open Port (${portConfig.comName}, ${portConfig.baudRate}, ${portConfig.dataBits}, ${portConfig.stopBits}, ${portConfig.parity})`}
-        index={0}
+        index={5}
         onPress={() => {
           store.dispatch({
             type: 'OPEN_PORT',

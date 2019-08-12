@@ -18,7 +18,7 @@ const getStore = (screen) => {
 
   return persistState.getPreloadedState()
     .then(preloadedState => (
-      createStore(reducers, Object.assign({ screenSize }, preloadedState ), compose(...enhancers))
+      createStore(reducers, Object.assign({ screenSize }, preloadedState), compose(...enhancers))
     ));
 };
 

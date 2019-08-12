@@ -7,13 +7,19 @@ const stylesheet = {
     type: 'line',
   },
   style: {
-    fg: '#00ff00',
+    bg: '#0000ff',
+    fg: '#00ffff',
     border: {
-      fg: '#00ff00',
+      bg: '#0000ff',
+      fg: '#00ffff',
     },
     bar: {
-      fg: '#00ff00',
-      bg: '#000000',
+      bg: '#0000ff',
+      fg: '#00ffff',
+    },
+    label: {
+      bg: '#0000ff',
+      fg: '#ffffff',
     },
   },
 };

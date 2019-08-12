@@ -18,6 +18,7 @@ class Console extends Component {
         ref={(node) => {
           this.node = node;
         }}
+        tags
         scrollable
         scrollOnInput
         class={stylesheet}
