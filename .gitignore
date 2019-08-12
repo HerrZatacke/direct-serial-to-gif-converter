@@ -1,4 +1,6 @@
 node_modules/
+dist/
+db/
 out/
 *.log
 npm-debug.log*
