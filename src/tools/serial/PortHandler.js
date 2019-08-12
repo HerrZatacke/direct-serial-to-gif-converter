@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import SerialPort from 'serialport';
 import Readline from '@serialport/parser-readline';
-import getImageFromLines from '../decode/getImageFromLines';
 
 class PortHandler {
   constructor(dispatch) {
@@ -40,9 +39,9 @@ class PortHandler {
 
     try {
       this.port = new SerialPort(portConfig.comName, {
-        baudRate: portConfig.baudRate,
-        dataBits: portConfig.dataBits,
-        stopBits: portConfig.stopBits,
+        baudRate: parseInt(portConfig.baudRate, 10),
+        dataBits: parseInt(portConfig.dataBits, 10),
+        stopBits: parseInt(portConfig.stopBits, 10),
         parity: portConfig.parity,
         autoOpen: true,
       });

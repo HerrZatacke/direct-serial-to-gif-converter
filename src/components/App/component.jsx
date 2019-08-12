@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import Button from '../Button';
+import ComSettings from '../ComSettings';
 import Console from '../Console';
 import Progress from '../Progress';
 
@@ -26,6 +27,7 @@ const App = ({ store, comName }) => (
         });
       }}
     />
+    <ComSettings />
     <Progress />
     <Console />
   </Provider>

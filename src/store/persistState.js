@@ -11,6 +11,8 @@ class PeristState {
       sparse: true,
     });
 
+    let compDelay = null;
+
     this.middleware = store => next => (action) => {
       next(action);
 
@@ -33,6 +35,11 @@ class PeristState {
             payload: 'Data persisted',
           });
         }
+
+        global.clearTimeout(compDelay);
+        compDelay = global.setTimeout(() => {
+          this.db.persistence.compactDatafile();
+        }, 1000);
       });
     };
   }
