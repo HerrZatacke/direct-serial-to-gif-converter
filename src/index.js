@@ -6,6 +6,14 @@ import initApp from './initApp';
 const screen = blessed.screen({
   autoPadding: true,
   smartCSR: true,
+  tabSize: 2,
+  dockBorders: true,
+  cursor: {
+    artificial: true,
+    shape: 'block',
+    blink: true,
+    color: '#ffffff',
+  },
 });
 
 const focusNext = () => {
@@ -17,7 +25,7 @@ const focusNext = () => {
 screen.key('C-c', () => process.exit(0));
 screen.key('tab', focusNext);
 
-getStore().then((store) => {
+getStore(screen).then((store) => {
   global.store = store;
   global.screen = screen;
   initApp(store, screen);

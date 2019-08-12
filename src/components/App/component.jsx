@@ -19,15 +19,6 @@ const App = ({ store, portConfig }) => (
         }}
       />
     ) : null}
-    <Button
-      text="Probe Ports"
-      index={1}
-      onPress={() => {
-        store.dispatch({
-          type: 'PROBE_PORTS',
-        });
-      }}
-    />
     <ComSettings />
     <Progress />
     <Console />

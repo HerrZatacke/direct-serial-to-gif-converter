@@ -2,13 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import stylesheet from './stylesheet';
 
-const ComSettings = ({ availablePorts, portConfig, updatePortConfig }) => {
+const ComSettings = ({
+  availablePorts,
+  portConfig,
+  listPorts,
+  updatePortConfig,
+  width,
+}) => {
 
   const lists = [
     {
       key: 'comName',
       label: 'Port Name',
-      values: availablePorts,
+      values: ['Refresh', ...availablePorts],
       selected: portConfig.comName,
     },
     {
@@ -38,48 +44,63 @@ const ComSettings = ({ availablePorts, portConfig, updatePortConfig }) => {
   ];
 
   const height = Math.min(5, Math.max(...lists.map(({ values }) => values.length)));
-  const width = Math.ceil(100 / lists.length);
+  let remainingWidth = width;
 
   return (
-    <layout
+    <box
       class={stylesheet.box}
       height={height}
     >
       {
-        lists.map(item => (
-          <list
-            key={item.key}
-            ref={(node) => {
-              if (node) {
-                const current = item.values.findIndex(val => val === item.selected.toString(10));
-                if (current !== -1) {
-                  node.select(current);
+        lists.map((item, index) => {
+          const elementWidth = Math.ceil(remainingWidth / (lists.length - index));
+          const elementOffset = width - remainingWidth;
+          remainingWidth -= elementWidth;
+
+          return (
+            <list
+              key={item.key}
+              ref={(node) => {
+                if (node) {
+                  const current = item.values.findIndex(val => val === item.selected.toString(10));
+                  if (current !== -1) {
+                    node.select(current);
+                  }
                 }
-              }
-            }}
-            class={stylesheet.list}
-            label={`${item.label} (${item.selected})`}
-            items={item.values}
-            width={`${width}%`}
-            height={height + 2}
-            select={1}
-            keys
-            onSelectItem={(_, selectedIndex) => {
-              updatePortConfig({
-                [item.key]: item.values[selectedIndex],
-              });
-            }}
-          />
-        ))
+              }}
+              class={stylesheet.list}
+              label={`${item.label} (${item.selected})`}
+              items={item.values}
+              height={height + 2}
+              width={elementWidth}
+              left={elementOffset}
+              keys
+              onSelectItem={(_, selectedIndex) => {
+                if (index !== 0 || selectedIndex !== 0) {
+                  updatePortConfig({
+                    [item.key]: item.values[selectedIndex],
+                  });
+                }
+              }}
+              onSelect={(_, selectedIndex) => {
+                if (index === 0 && selectedIndex === 0) {
+                  listPorts();
+                }
+              }}
+            />
+          );
+        })
       }
-    </layout>
+    </box>
   );
 };
 
 ComSettings.propTypes = {
   availablePorts: PropTypes.array.isRequired,
   portConfig: PropTypes.object.isRequired,
+  listPorts: PropTypes.func.isRequired,
   updatePortConfig: PropTypes.func.isRequired,
+  width: PropTypes.number.isRequired,
 };
 
 export default ComSettings;

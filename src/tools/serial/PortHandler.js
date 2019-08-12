@@ -11,7 +11,7 @@ class PortHandler {
     this.lineCount = 0;
   }
 
-  probePorts() {
+  listPorts() {
     SerialPort.list((error, results) => {
       if (error) {
         this.dispatchFunction({

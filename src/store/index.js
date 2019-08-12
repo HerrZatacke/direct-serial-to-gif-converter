@@ -10,9 +10,16 @@ const enhancers = [
   applyMiddleware(persistState.getMiddleware()),
 ];
 
-const getStore = () => persistState.getPreloadedState()
-  .then(preloadedState => (
-    createStore(reducers, preloadedState, compose(...enhancers))
-  ));
+const getStore = (screen) => {
+  const screenSize = {
+    width: screen.width,
+    height: screen.height,
+  };
+
+  return persistState.getPreloadedState()
+    .then(preloadedState => (
+      createStore(reducers, Object.assign({ screenSize }, preloadedState ), compose(...enhancers))
+    ));
+};
 
 export default getStore;

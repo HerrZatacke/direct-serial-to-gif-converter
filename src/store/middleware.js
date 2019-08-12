@@ -26,8 +26,8 @@ const middleware = (store) => {
       case 'OPEN_PORT':
         portHandler.openPort(state.config.portConfig);
         break;
-      case 'PROBE_PORTS':
-        portHandler.probePorts();
+      case 'LIST_PORTS':
+        portHandler.listPorts();
         break;
       case 'PORTS_AVAILABLE':
         store.dispatch({
