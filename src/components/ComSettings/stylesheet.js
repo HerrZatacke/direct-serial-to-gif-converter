@@ -1,6 +1,7 @@
 const stylesheet = {
   box: {
     top: 8,
+    width: '100%',
   },
   list: {
     border: {

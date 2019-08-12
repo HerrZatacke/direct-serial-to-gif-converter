@@ -6,18 +6,19 @@ import ComSettings from '../ComSettings';
 import Console from '../Console';
 import Progress from '../Progress';
 
-const App = ({ store, comName }) => (
+const App = ({ store, portConfig }) => (
   <Provider store={store}>
-    <Button
-      text={`Open Port (${comName})`}
-      index={0}
-      onPress={() => {
-        store.dispatch({
-          type: 'OPEN_PORT',
-        });
-      }}
-    />
-    <Console />
+    { portConfig.comName ? (
+      <Button
+        text={`Open Port (${portConfig.comName}, ${portConfig.baudRate}, ${portConfig.dataBits}, ${portConfig.stopBits}, ${portConfig.parity})`}
+        index={0}
+        onPress={() => {
+          store.dispatch({
+            type: 'OPEN_PORT',
+          });
+        }}
+      />
+    ) : null}
     <Button
       text="Probe Ports"
       index={1}
@@ -35,7 +36,7 @@ const App = ({ store, comName }) => (
 
 App.propTypes = {
   store: PropTypes.object.isRequired,
-  comName: PropTypes.string.isRequired,
+  portConfig: PropTypes.object.isRequired,
 };
 
 export default App;

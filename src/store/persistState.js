@@ -30,16 +30,16 @@ class PeristState {
             payload: `Data persist Error: ${error}`,
           });
         } else {
-          store.dispatch({
-            type: 'LOG_MESSAGE',
-            payload: 'Data persisted',
-          });
+          global.clearTimeout(compDelay);
+          compDelay = global.setTimeout(() => {
+            store.dispatch({
+              type: 'LOG_MESSAGE',
+              payload: 'Data persisted',
+            });
+            this.db.persistence.compactDatafile();
+          }, 1000);
         }
 
-        global.clearTimeout(compDelay);
-        compDelay = global.setTimeout(() => {
-          this.db.persistence.compactDatafile();
-        }, 1000);
       });
     };
   }

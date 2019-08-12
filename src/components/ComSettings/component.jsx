@@ -40,15 +40,13 @@ const ComSettings = ({ availablePorts, portConfig, updatePortConfig }) => {
   const height = Math.min(5, Math.max(...lists.map(({ values }) => values.length)));
   const width = Math.ceil(100 / lists.length);
 
-  console.log(width);
-
   return (
-    <box
+    <layout
       class={stylesheet.box}
-      height={availablePorts.length + 4}
+      height={height}
     >
       {
-        lists.map((item, index) => (
+        lists.map(item => (
           <list
             key={item.key}
             ref={(node) => {
@@ -63,7 +61,6 @@ const ComSettings = ({ availablePorts, portConfig, updatePortConfig }) => {
             label={`${item.label} (${item.selected})`}
             items={item.values}
             width={`${width}%`}
-            left={`${width * index}%`}
             height={height + 2}
             select={1}
             keys
@@ -75,7 +72,7 @@ const ComSettings = ({ availablePorts, portConfig, updatePortConfig }) => {
           />
         ))
       }
-    </box>
+    </layout>
   );
 };
 
