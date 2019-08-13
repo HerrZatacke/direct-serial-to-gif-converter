@@ -25,6 +25,7 @@
     "mkdirp": "^0.5.1",
     "nedb": "^1.8.0",
     "omggif": "^1.0.10",
+    "open": "^6.4.0",
     "prop-types": "^15.7.2",
     "react": "16.9.0",
     "react-blessed": "0.6.1",
