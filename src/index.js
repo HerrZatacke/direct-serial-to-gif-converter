@@ -19,7 +19,10 @@ const screen = blessed.screen({
 const focusNext = () => {
   const keyables = screen.keyable;
   const nextFocusIndex = (keyables.findIndex(({ focused }) => focused) + 1) % keyables.length;
-  keyables[nextFocusIndex].focus();
+  const nextFocused = keyables[nextFocusIndex];
+  if (nextFocused) {
+    nextFocused.focus();
+  }
 };
 
 screen.key('C-c', () => process.exit(0));
