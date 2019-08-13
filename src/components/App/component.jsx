@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import ComSettings from '../ComSettings';
 import Console from '../Console';
-import MainMenu from '../MainMenu';
-import Progress from '../Progress';
+import ModuleSwitch from '../ModuleSwitch';
 
 const App = ({ store }) => (
   <Provider store={store}>
-    <ComSettings />
-    <Progress />
+    <ModuleSwitch />
     <Console />
-    <MainMenu />
   </Provider>
 );
 

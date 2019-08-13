@@ -23,13 +23,19 @@ const middleware = (store) => {
     }
 
     switch (action.type) {
-      case 'OPEN_PORT':
-        portHandler.openPort(state.config.portConfig);
+      case 'SET_ACTIVE_MODULE':
+        portHandler.closePort();
+        switch (action.payload) {
+          case 'OPEN_PORT':
+            portHandler.openPort(state.config.portConfig);
+            break;
+          case 'CONFIG_PORT':
+            portHandler.listPorts();
+            break;
+          default:
+        }
         break;
-      case 'LIST_PORTS':
-        portHandler.listPorts();
-        break;
-        case 'RAW_IMAGE_COMPLETE':
+      case 'RAW_IMAGE_COMPLETE':
         saveRawImage(action.payload)
           .then(({ filename, hash }) => {
             store.dispatch({

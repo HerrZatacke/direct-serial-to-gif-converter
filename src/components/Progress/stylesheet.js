@@ -1,7 +1,8 @@
 const stylesheet = {
   height: 3,
-  bottom: 9,
+  top: 0,
   label: 'Progress',
+  width: '60%',
   pch: '▓',
   border: {
     type: 'line',

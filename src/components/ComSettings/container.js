@@ -15,11 +15,6 @@ const mapDispatchToProps = dispatch => ({
       },
     });
   },
-  listPorts: () => {
-    dispatch({
-      type: 'LIST_PORTS',
-    });
-  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps);

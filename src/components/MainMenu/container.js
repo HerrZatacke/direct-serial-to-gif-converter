@@ -1,40 +1,17 @@
 import { connect } from 'react-redux';
-
-const buttons = [
-  {
-    text: 'Open Port',
-    key: 1,
-    actionType: 'OPEN_PORT',
-  },
-  {
-    text: 'Configure Port',
-    key: 2,
-    // actionType: 'CONFIGURE_PORT',
-  },
-  {
-    text: 'Import Dump',
-    key: 3,
-  },
-  {
-    text: 'Export',
-    key: 4,
-  },
-  {
-    text: 'Animate',
-    key: 5,
-  },
-];
+import mainMenuButtons from '../../mainMenuButtons';
 
 const mapStateToProps = () => ({
-  buttons,
+  buttons: mainMenuButtons,
 });
 
 const mapDispatchToProps = dispatch => ({
   handleMenu: (index) => {
-    const pressed = buttons[index];
-    if (pressed.actionType) {
+    const pressed = mainMenuButtons[index];
+    if (pressed.moduleId) {
       dispatch({
-        type: pressed.actionType,
+        type: 'SET_ACTIVE_MODULE',
+        payload: pressed.moduleId,
       });
     }
   },

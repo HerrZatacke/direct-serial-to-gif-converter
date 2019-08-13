@@ -8,7 +8,6 @@ class PortHandler {
     this.dispatchFunction = dispatch;
     this.port = null;
     this.lines = [];
-    this.lineCount = 0;
   }
 
   listPorts() {
@@ -26,6 +25,14 @@ class PortHandler {
         payload: results.map(({ comName }) => comName),
       });
     });
+  }
+
+  closePort() {
+    if (this.port) {
+      this.port.close();
+    }
+    this.lines = [];
+    this.port = null;
   }
 
   openPort(portConfig) {

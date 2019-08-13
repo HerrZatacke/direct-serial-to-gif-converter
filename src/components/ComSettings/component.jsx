@@ -17,7 +17,6 @@ class ComSettings extends Component {
     const {
       availablePorts,
       portConfig,
-      listPorts,
       updatePortConfig,
     } = this.props;
 
@@ -25,7 +24,7 @@ class ComSettings extends Component {
       {
         key: 'comName',
         label: 'Port Name',
-        values: ['Refresh', ...availablePorts],
+        values: availablePorts,
         selected: portConfig.comName,
       },
       {
@@ -103,11 +102,6 @@ class ComSettings extends Component {
                     });
                   }
                 }}
-                onSelect={(_, selectedIndex) => {
-                  if (index === 0 && selectedIndex === 0) {
-                    listPorts();
-                  }
-                }}
               />
             );
           })
@@ -120,7 +114,6 @@ class ComSettings extends Component {
 ComSettings.propTypes = {
   availablePorts: PropTypes.array.isRequired,
   portConfig: PropTypes.object.isRequired,
-  listPorts: PropTypes.func.isRequired,
   updatePortConfig: PropTypes.func.isRequired,
 };
 
