@@ -3,7 +3,7 @@ const linesReducer = (line = '', action) => {
     case 'LINE_RECEIVED':
       return action.payload;
     case 'RAW_IMAGE_COMPLETE':
-      return 360;
+      return 0;
     default:
       return line;
   }
