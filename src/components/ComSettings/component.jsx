@@ -96,11 +96,14 @@ class ComSettings extends Component {
                 left={elementOffset}
                 keys
                 onSelectItem={(_, selectedIndex) => {
-                  if (index !== 0 || selectedIndex !== 0) {
-                    updatePortConfig({
-                      [item.key]: item.values[selectedIndex],
-                    });
-                  }
+                  updatePortConfig({
+                    [item.key]: item.values[selectedIndex],
+                  });
+                }}
+                onSelect={(_, selectedIndex) => {
+                  updatePortConfig({
+                    [item.key]: item.values[selectedIndex],
+                  });
                 }}
               />
             );
