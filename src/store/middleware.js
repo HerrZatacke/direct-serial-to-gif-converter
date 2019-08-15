@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import mkdirp from 'mkdirp';
 import open from 'open';
 import PortHandler from '../tools/serial/PortHandler';
 import saveRawImage from './middleware/saveRawImage';
@@ -44,7 +45,9 @@ const middleware = (store) => {
             });
 
             // throw a gif into the raw folder, just to have somethiong to look at...
-            const tmpFile = path.join(process.cwd(), 'out', 'raw', `${hash}.gif`);
+            const tmpDir = path.join(process.cwd(), 'out', 'raw', 'gif');
+            mkdirp.sync(path.join(tmpDir));
+            const tmpFile = path.join(tmpDir, `${hash}.gif`);
             fs.writeFileSync(tmpFile, createGif(getImageFromLines(action.payload), { scale: 4 }));
             open(tmpFile);
           });

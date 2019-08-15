@@ -3,7 +3,7 @@ import path from 'path';
 import crypto from 'crypto';
 import mkdirp from 'mkdirp';
 
-const rawDir = path.join(process.cwd(), 'out', 'raw');
+const rawDir = path.join(process.cwd(), 'out', 'raw', 'images');
 
 const saveRawImage = imageData => (
   new Promise((resolve, reject) => {

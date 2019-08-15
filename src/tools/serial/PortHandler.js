@@ -8,6 +8,12 @@ class PortHandler {
     this.dispatchFunction = dispatch;
     this.port = null;
     this.lines = [];
+    this.outDir = path.join(process.cwd(), 'out');
+    this.rawDir = path.join(this.outDir, 'raw');
+    this.rawWriteStream = fs.createWriteStream(path.join(this.rawDir, 'rawInput.txt'), {
+      flags: 'a',
+      encoding: 'utf8',
+    });
   }
 
   listPorts() {
@@ -98,10 +104,9 @@ class PortHandler {
     });
 
     const parser = this.port.pipe(new Readline({ delimiter: '\n' }));
-    const out = fs.createWriteStream(path.join(process.cwd(), 'out.txt'), { flags: 'a' });
 
     parser.on('data', (line) => {
-      out.write(`${line}\n`);
+      this.rawWriteStream.write(`${line}\n`);
       this.handleLine(line);
     });
   }
