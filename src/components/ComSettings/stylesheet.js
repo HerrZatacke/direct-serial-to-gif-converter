@@ -3,6 +3,15 @@ const stylesheet = {
     top: 0,
     width: '60%',
   },
+  infobox: {
+    top: 0,
+    width: '60%',
+    height: 1,
+    style: {
+      bg: '#00ffff',
+      fg: '#ffffff',
+    },
+  },
   list: {
     border: {
       type: 'line',
@@ -25,7 +34,7 @@ const stylesheet = {
         },
       },
       selected: {
-        fg: '#0000ff',
+        // fg: '#0000ff',
         bg: '#00ffff',
       },
       item: {

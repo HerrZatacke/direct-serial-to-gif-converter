@@ -44,6 +44,20 @@ class PortHandler {
       return;
     }
 
+    if (
+      !portConfig.comName ||
+      !portConfig.baudRate ||
+      !portConfig.dataBits ||
+      !portConfig.stopBits ||
+      !portConfig.parity
+    ) {
+      this.dispatchFunction({
+        type: 'LOG_MESSAGE',
+        payload: 'Portconfig is incomplete',
+      });
+      return;
+    }
+
     try {
       this.port = new SerialPort(portConfig.comName, {
         baudRate: parseInt(portConfig.baudRate, 10),
@@ -53,8 +67,11 @@ class PortHandler {
         autoOpen: true,
       });
     } catch (error) {
-      console.error(error);
-      process.exit();
+      this.dispatchFunction({
+        type: 'LOG_MESSAGE',
+        payload: `Error opening port: ${error.message}`,
+      });
+      return;
     }
 
     this.port.on('open', () => {

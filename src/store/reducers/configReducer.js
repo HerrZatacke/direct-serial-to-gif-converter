@@ -2,10 +2,10 @@ import deepmerge from 'deepmerge';
 
 const defaultPortConfig = {
   comName: '',
-  baudRate: 115200,
-  dataBits: 7,
-  stopBits: 1,
-  parity: 'even',
+  baudRate: '',
+  dataBits: '',
+  stopBits: '',
+  parity: '',
 };
 
 const configReducer = (config = { portConfig: defaultPortConfig }, action) => {

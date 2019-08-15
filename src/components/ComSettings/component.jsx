@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import stylesheet from './stylesheet';
+import CheckableList from '../CheckableList';
 
 class ComSettings extends Component {
 
@@ -53,63 +54,56 @@ class ComSettings extends Component {
       },
     ];
 
-    const height = Math.min(10, Math.max(...lists.map(({ values }) => values.length)));
+    const height = 2 + Math.min(10, Math.max(...lists.map(({ values }) => values.length)));
     let remainingWidth = this.state.width;
 
     return (
-      <box
-        class={stylesheet.box}
-        height={height}
-        ref={(node) => {
-          this.node = node || this.node;
-          if (this.node.width === this.state.width) {
-            return;
+      <Fragment>
+        <box
+          class={stylesheet.box}
+          height={height}
+          ref={(node) => {
+            this.node = node || this.node;
+            if (this.node.width === this.state.width) {
+              return;
+            }
+
+            this.setState({
+              width: this.node.width,
+            });
+          }}
+        >
+          {
+            lists.map((item, index) => {
+              const elementWidth = Math.ceil(remainingWidth / (lists.length - index));
+              const elementOffset = this.state.width - remainingWidth;
+              remainingWidth -= elementWidth;
+
+              return (
+                <CheckableList
+                  key={item.key}
+                  label={item.label}
+                  value={item.selected}
+                  values={item.values}
+                  height={height}
+                  width={elementWidth}
+                  left={elementOffset}
+                  onSelect={(value) => {
+                    updatePortConfig({
+                      [item.key]: value,
+                    });
+                  }}
+                />
+              );
+            })
           }
-
-          this.setState({
-            width: this.node.width,
-          });
-        }}
-      >
-        {
-          lists.map((item, index) => {
-            const elementWidth = Math.ceil(remainingWidth / (lists.length - index));
-            const elementOffset = this.state.width - remainingWidth;
-            remainingWidth -= elementWidth;
-
-            return (
-              <list
-                key={item.key}
-                ref={(node) => {
-                  if (node) {
-                    const current = item.values.findIndex(val => val === item.selected.toString(10));
-                    if (current !== -1) {
-                      node.select(current);
-                    }
-                  }
-                }}
-                class={stylesheet.list}
-                label={`${item.label} (${item.selected})`}
-                items={item.values}
-                height={height + 2}
-                width={elementWidth}
-                left={elementOffset}
-                keys
-                onSelectItem={(_, selectedIndex) => {
-                  updatePortConfig({
-                    [item.key]: item.values[selectedIndex],
-                  });
-                }}
-                onSelect={(_, selectedIndex) => {
-                  updatePortConfig({
-                    [item.key]: item.values[selectedIndex],
-                  });
-                }}
-              />
-            );
-          })
-        }
-      </box>
+        </box>
+        <box
+          top={height}
+          class={stylesheet.infobox}
+          content={`${portConfig.comName} ${portConfig.baudRate} ${portConfig.dataBits} ${portConfig.stopBits} ${portConfig.parity}`}
+        />
+      </Fragment>
     );
   }
 }
