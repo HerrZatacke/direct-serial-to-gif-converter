@@ -9,10 +9,11 @@ const buttons = [
     key: 2,
     moduleId: 'CONFIG_PORT',
   },
-  // {
-  //   text: 'Import Dump',
-  //   key: 3,
-  // },
+  {
+    text: 'Handle Raw Dumps',
+    key: 3,
+    moduleId: 'RAW_DUMPS',
+  },
   // {
   //   text: 'Export',
   //   key: 4,

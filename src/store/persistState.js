@@ -4,6 +4,7 @@ import Datastore from 'nedb';
 class PeristState {
   constructor() {
     this.db = new Datastore({ filename: path.join(process.cwd(), 'db', 'state.db'), autoload: true });
+    this.compactDelay = null;
 
     this.db.ensureIndex({
       fieldName: 'key',
@@ -11,37 +12,41 @@ class PeristState {
       sparse: true,
     });
 
-    let compDelay = null;
 
     this.middleware = store => next => (action) => {
       next(action);
-
-      if (
-        // Add further actions here when store needs persisting
-        action.type !== 'SET_CONFIG'
-      ) {
-        return;
+      const state = store.getState();
+      switch (action.type) {
+        case 'SET_CONFIG':
+          this.updateDb('config', state.config || {}, store);
+          break;
+        case 'CHANGE_DUMPDIR':
+          this.updateDb('dumpDir', state.dumpDir || '', store);
+          break;
+        default:
       }
+    };
+  }
 
-      this.db.update({ key: 'config' }, { key: 'config', value: store.getState().config || {} }, { upsert: true }, (error) => {
-        if (error) {
+  updateDb(key, value, store) {
+    this.db.update({ key }, { key, value }, { upsert: true }, (error) => {
+      if (error) {
+        store.dispatch({
+          type: 'LOG_MESSAGE',
+          payload: `Data persist Error: ${error}`,
+        });
+      } else {
+        global.clearTimeout(this.compactDelay);
+        this.compactDelay = global.setTimeout(() => {
           store.dispatch({
             type: 'LOG_MESSAGE',
-            payload: `Data persist Error: ${error}`,
+            payload: 'Data persisted',
           });
-        } else {
-          global.clearTimeout(compDelay);
-          compDelay = global.setTimeout(() => {
-            store.dispatch({
-              type: 'LOG_MESSAGE',
-              payload: 'Data persisted',
-            });
-            this.db.persistence.compactDatafile();
-          }, 1000);
-        }
+          this.db.persistence.compactDatafile();
+        }, 1000);
+      }
 
-      });
-    };
+    });
   }
 
   getMiddleware() {

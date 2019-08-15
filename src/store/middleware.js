@@ -3,6 +3,7 @@ import fs from 'fs';
 import mkdirp from 'mkdirp';
 import open from 'open';
 import PortHandler from '../tools/serial/PortHandler';
+import DumpHandler from '../tools/fs/DumpHandler';
 import saveRawImage from './middleware/saveRawImage';
 import getImageFromLines from '../tools/decode/getImageFromLines';
 import createGif from '../tools/imageCreation/createGif';
@@ -10,6 +11,7 @@ import createGif from '../tools/imageCreation/createGif';
 const middleware = (store) => {
 
   const portHandler = new PortHandler(store.dispatch);
+  const dumpHandler = new DumpHandler(store.dispatch);
 
   return next => (action) => {
 
@@ -33,8 +35,14 @@ const middleware = (store) => {
           case 'CONFIG_PORT':
             portHandler.listPorts();
             break;
+          case 'RAW_DUMPS':
+            dumpHandler.open(state.dumpDir);
+            break;
           default:
         }
+        break;
+      case 'SELECT_DUMP_DIR_FILE':
+        dumpHandler.open(action.payload);
         break;
       case 'RAW_IMAGE_COMPLETE':
         saveRawImage(action.payload)

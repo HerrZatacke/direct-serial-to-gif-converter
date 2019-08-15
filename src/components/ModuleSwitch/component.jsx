@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ComSettings from '../ComSettings';
+import DumpSelector from '../DumpSelector';
 import Progress from '../Progress';
 import MainMenu from '../MainMenu';
 
@@ -17,6 +18,13 @@ const ModuleSwitch = ({ activeModule }) => {
       return (
         <Fragment>
           <ComSettings />
+          <MainMenu inactive />
+        </Fragment>
+      );
+    case 'RAW_DUMPS':
+      return (
+        <Fragment>
+          <DumpSelector />
           <MainMenu inactive />
         </Fragment>
       );

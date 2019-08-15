@@ -2,12 +2,13 @@ import fs from 'fs';
 import path from 'path';
 import SerialPort from 'serialport';
 import Readline from '@serialport/parser-readline';
+import LineHandler from '../raw/LineHandler';
 
 class PortHandler {
   constructor(dispatch) {
     this.dispatchFunction = dispatch;
     this.port = null;
-    this.lines = [];
+    this.lineHandler = new LineHandler(dispatch);
     this.outDir = path.join(process.cwd(), 'out');
     this.rawDir = path.join(this.outDir, 'raw');
     this.rawWriteStream = fs.createWriteStream(path.join(this.rawDir, 'rawInput.txt'), {
@@ -37,7 +38,7 @@ class PortHandler {
     if (this.port) {
       this.port.close();
     }
-    this.lines = [];
+    this.lineHandler.reset();
     this.port = null;
   }
 
@@ -107,37 +108,12 @@ class PortHandler {
 
     parser.on('data', (line) => {
       this.rawWriteStream.write(`${line}\n`);
-      this.handleLine(line);
-    });
-  }
+      this.lineHandler.handleLine(line);
 
-  handleLine(line) {
-
-    if (!line.startsWith('!') && !line.startsWith('#')) {
-      this.lines.push(line.replace(/[^0-9A-F]/ig, ''));
-    } else {
-      const command = line.startsWith('!') ? JSON.parse(line.slice(1).trim()) : {};
-
-      switch (command.command) {
-        case 'INIT':
-          this.lines = [];
-          break;
-        case 'DATA':
-          if (!command.more) {
-            this.dispatchFunction({
-              type: 'RAW_IMAGE_COMPLETE',
-              payload: this.lines,
-            });
-          }
-          break;
-        default:
-      }
-      return;
-    }
-
-    this.dispatchFunction({
-      type: 'LINE_RECEIVED',
-      payload: this.lines.length,
+      this.dispatchFunction({
+        type: 'LINE_RECEIVED',
+        payload: this.lineHandler.getLineCount(),
+      });
     });
   }
 }
