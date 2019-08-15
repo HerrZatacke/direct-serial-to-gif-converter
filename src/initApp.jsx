@@ -27,6 +27,7 @@ const initApp = (store, screen) => {
 
     screen.alloc();
     screen.render();
+    screen.focusNext();
   });
 
   render(<App store={store} />, screen);
