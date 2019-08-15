@@ -1,22 +1,12 @@
-import fs from 'fs';
+import folderContent from '../../tools/folderContent';
 
 const dumpDirContentReducer = (dumpDirContent = [], action) => {
   switch (action.type) {
     case 'CHANGE_DUMPDIR':
       try {
-        return [
-          {
-            value: '..',
-            label: '..',
-          },
-          ...fs.readdirSync(action.payload, { encoding: 'utf8' })
-            .filter(filename => filename[0] !== '.')
-            .map(filename => ({
-              value: filename,
-              label: filename,
-            })),
-        ];
+        return folderContent(action.payload);
       } catch (error) {
+        console.error(error);
         return [];
       }
     default:
