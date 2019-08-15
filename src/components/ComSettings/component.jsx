@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import stylesheet from './stylesheet';
-import CheckableList from '../CheckableList';
+import List from '../List';
 
 class ComSettings extends Component {
 
@@ -80,7 +80,7 @@ class ComSettings extends Component {
               remainingWidth -= elementWidth;
 
               return (
-                <CheckableList
+                <List
                   key={item.key}
                   label={item.label}
                   value={item.selected}

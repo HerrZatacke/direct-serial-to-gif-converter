@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import chalk from 'chalk';
 import stylesheet from './stylesheet';
 
-const CheckableList = ({
+const List = ({
   height,
   label,
   left,
@@ -31,7 +31,7 @@ const CheckableList = ({
   );
 };
 
-CheckableList.propTypes = {
+List.propTypes = {
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   label: PropTypes.string,
   left: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -41,8 +41,8 @@ CheckableList.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
-CheckableList.defaultProps = {
+List.defaultProps = {
   label: null,
 };
 
-export default CheckableList;
+export default List;

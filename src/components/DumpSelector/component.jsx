@@ -2,14 +2,14 @@ import path from 'path';
 import React from 'react';
 import PropTypes from 'prop-types';
 // import stylesheet from './stylesheet';
-import CheckableList from '../CheckableList';
+import List from '../List';
 
 const DumpSelector = ({
   dumpDir,
   dumpDirContent,
   updateDumpDir,
 }) => (
-  <CheckableList
+  <List
     height="80%"
     label={dumpDir}
     left={0}
