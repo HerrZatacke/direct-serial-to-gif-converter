@@ -2,14 +2,14 @@ import path from 'path';
 import React from 'react';
 import PropTypes from 'prop-types';
 // import stylesheet from './stylesheet';
-import List from '../List';
+import ListTable from '../ListTable';
 
 const DumpSelector = ({
   dumpDir,
   dumpDirContent,
   updateDumpDir,
 }) => (
-  <List
+  <ListTable
     height="80%"
     boxLabel={dumpDir}
     left={0}
@@ -26,7 +26,7 @@ const DumpSelector = ({
 DumpSelector.propTypes = {
   dumpDir: PropTypes.string.isRequired,
   dumpDirContent: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
+    data: PropTypes.array.isRequired,
     value: PropTypes.string.isRequired,
   })).isRequired,
   updateDumpDir: PropTypes.func.isRequired,
