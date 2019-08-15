@@ -25,7 +25,7 @@ class List extends Component {
   }
 
   getCurrentItemIndex() {
-    return this.props.values.findIndex(({ label }) => label === this.props.value);
+    return this.props.values.findIndex(({ value }) => value === this.props.value);
   }
 
   render() {
