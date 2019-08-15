@@ -1,4 +1,4 @@
-const dumpDirReducer = (dumpDir = '', action) => {
+const dumpDirReducer = (dumpDir = process.cwd(), action) => {
   switch (action.type) {
     case 'CHANGE_DIR':
       return action.payload;
