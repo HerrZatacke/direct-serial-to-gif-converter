@@ -81,6 +81,7 @@ class ComSettings extends Component {
 
               return (
                 <List
+                  checkMark="■"
                   key={item.key}
                   label={item.label}
                   value={item.selected}
