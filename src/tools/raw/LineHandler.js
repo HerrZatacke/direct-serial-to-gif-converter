@@ -1,3 +1,11 @@
+const getCommand = (line) => {
+  try {
+    return Object.assign({}, JSON.parse(line.slice(1).trim()));
+  } catch (error) {
+    return {};
+  }
+};
+
 class LineHandler {
   constructor(dispatch) {
     this.dispatchFunction = dispatch;
@@ -12,14 +20,6 @@ class LineHandler {
     return this.lines.length;
   }
 
-  static getCommand(line) {
-    try {
-      return Object.assign({}, JSON.parse(line.slice(1).trim()));
-    } catch (error) {
-      return {};
-    }
-  }
-
   handleLine(line) {
     if (!line.startsWith('!') && !line.startsWith('#')) {
       const cleanedLine = line.replace(/[^0-9A-F]/ig, '');
@@ -27,7 +27,7 @@ class LineHandler {
         this.lines.push(cleanedLine);
       }
     } else {
-      const command = this.getCommand(line);
+      const command = getCommand(line);
 
       switch (command.command) {
         case 'INIT':
