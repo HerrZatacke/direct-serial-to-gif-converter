@@ -9,6 +9,10 @@ class List extends Component {
     this.node = null;
   }
 
+  componentDidMount() {
+    this.node.select(this.getCurrentItemIndex());
+  }
+
   componentDidUpdate(prevProps) {
     const { value, values } = this.props;
     if (JSON.stringify(prevProps.values) !== JSON.stringify(values)) {
@@ -21,23 +25,23 @@ class List extends Component {
   }
 
   getCurrentItemIndex() {
-    return this.props.values.findIndex(val => val === this.props.value);
+    return this.props.values.findIndex(({ label }) => label === this.props.value);
   }
 
   render() {
     const {
       checkMark,
       height,
-      label,
+      boxLabel,
       left,
       onSelect,
       values,
       width,
     } = this.props;
 
-    const items = values.map((itemText, itemIndex) => {
+    const items = values.map(({ label }, itemIndex) => {
       const visualCheckMark = checkMark ? `[${itemIndex === this.getCurrentItemIndex() ? chalk.white(checkMark) : ' '}] ` : '';
-      return `${visualCheckMark}${itemText}`;
+      return `${visualCheckMark}${label}`;
     });
 
     return (
@@ -46,14 +50,14 @@ class List extends Component {
           this.node = node || this.node;
         }}
         class={stylesheet}
-        label={label}
+        label={boxLabel}
         items={items}
         height={height}
         width={width}
         left={left}
         keys
         onSelect={(_, selectedIndex) => {
-          onSelect(values[selectedIndex]);
+          onSelect(values[selectedIndex].value);
         }}
       />
     );
@@ -62,18 +66,20 @@ class List extends Component {
 
 List.propTypes = {
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  label: PropTypes.string,
+  boxLabel: PropTypes.string.isRequired,
   left: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onSelect: PropTypes.func.isRequired,
   checkMark: PropTypes.string,
   value: PropTypes.string.isRequired,
-  values: PropTypes.array.isRequired,
+  values: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  })).isRequired,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 List.defaultProps = {
   checkMark: '',
-  label: null,
 };
 
 export default List;

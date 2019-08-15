@@ -83,9 +83,12 @@ class ComSettings extends Component {
                 <List
                   checkMark="■"
                   key={item.key}
-                  label={item.label}
+                  boxLabel={item.label}
                   value={item.selected}
-                  values={item.values}
+                  values={item.values.map(value => ({
+                    label: value,
+                    value,
+                  }))}
                   height={height}
                   width={elementWidth}
                   left={elementOffset}

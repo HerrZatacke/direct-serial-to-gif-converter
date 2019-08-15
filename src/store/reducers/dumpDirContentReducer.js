@@ -5,9 +5,16 @@ const dumpDirContentReducer = (dumpDirContent = [], action) => {
     case 'CHANGE_DUMPDIR':
       try {
         return [
-          '..',
+          {
+            value: '..',
+            label: '..',
+          },
           ...fs.readdirSync(action.payload, { encoding: 'utf8' })
-            .filter(filename => filename[0] !== '.'),
+            .filter(filename => filename[0] !== '.')
+            .map(filename => ({
+              value: filename,
+              label: filename,
+            })),
         ];
       } catch (error) {
         return [];

@@ -11,7 +11,7 @@ const DumpSelector = ({
 }) => (
   <List
     height="80%"
-    label={dumpDir}
+    boxLabel={dumpDir}
     left={0}
     values={dumpDirContent}
     value=".."
@@ -25,7 +25,10 @@ const DumpSelector = ({
 
 DumpSelector.propTypes = {
   dumpDir: PropTypes.string.isRequired,
-  dumpDirContent: PropTypes.arrayOf(PropTypes.string).isRequired,
+  dumpDirContent: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  })).isRequired,
   updateDumpDir: PropTypes.func.isRequired,
 };
 
