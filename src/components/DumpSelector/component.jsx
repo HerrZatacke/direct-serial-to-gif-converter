@@ -10,7 +10,7 @@ const DumpSelector = ({
   updateDumpDir,
 }) => (
   <ListTable
-    height="80%"
+    height="100%-1"
     boxLabel={dumpDir}
     left={0}
     values={dumpDirContent}

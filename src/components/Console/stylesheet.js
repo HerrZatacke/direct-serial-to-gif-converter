@@ -1,5 +1,5 @@
 const stylesheet = {
-  height: '80%',
+  height: '100%-1',
   width: '40%',
   right: 0,
   label: 'Log',

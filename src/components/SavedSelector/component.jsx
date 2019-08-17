@@ -8,7 +8,7 @@ const SavedSelector = ({
   setSelectedImages,
 }) => (
   <MultiListTable
-    height="80%"
+    height="100%-1"
     boxLabel={`Saved Images (${imageList.length})`}
     left={0}
     values={imageList.map(({ created, hash }) => ({
