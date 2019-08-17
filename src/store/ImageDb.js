@@ -62,7 +62,7 @@ class ImageDb {
 
   list() {
     return new Promise((resolve, reject) => {
-      this.db.find({}).sort({ created: 1 }).exec((error, documents) => {
+      this.db.find({}).sort({ created: -1 }).exec((error, documents) => {
         if (error) {
           reject(error);
           return;
