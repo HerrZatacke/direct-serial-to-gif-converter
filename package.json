@@ -21,6 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "@serialport/parser-readline": "^2.0.2",
+    "dayjs": "^1.8.15",
     "deepmerge": "^4.0.0",
     "filesize": "^4.1.2",
     "mkdirp": "^0.5.1",

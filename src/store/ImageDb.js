@@ -2,6 +2,7 @@
 import path from 'path';
 import crypto from 'crypto';
 import Datastore from 'nedb';
+import dayjs from 'dayjs';
 
 class ImageDb {
   constructor() {
@@ -67,7 +68,10 @@ class ImageDb {
           reject(error);
           return;
         }
-        resolve(documents);
+        resolve(documents.map(doc => ({
+          ...doc,
+          created: dayjs(doc.created).format('DD.MMM.YYYY - HH:mm:ss'), // SSS for millis
+        })));
       });
     });
   }

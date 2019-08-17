@@ -11,7 +11,7 @@ const SavedSelector = ({
     left={0}
     values={imageList.map(({ created, hash }) => ({
       value: hash,
-      data: [hash, (new Date(created)).toLocaleString()],
+      data: [hash, created],
     }))}
     value=".."
     width="60%"
@@ -26,7 +26,7 @@ SavedSelector.propTypes = {
   imageList: PropTypes.arrayOf(PropTypes.shape({
     binary: PropTypes.array.isRequired,
     hash: PropTypes.string.isRequired,
-    created: PropTypes.number.isRequired,
+    created: PropTypes.string.isRequired,
   })).isRequired,
 };
 
