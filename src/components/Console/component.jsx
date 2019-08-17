@@ -8,8 +8,10 @@ class Console extends Component {
     this.node = null;
   }
 
-  componentDidUpdate() {
-    this.node.add(this.props.messages[0]);
+  componentDidUpdate(prevProps) {
+    if (prevProps.messages.length !== this.props.messages.length) {
+      this.node.add(this.props.messages[0]);
+    }
   }
 
   render() {
