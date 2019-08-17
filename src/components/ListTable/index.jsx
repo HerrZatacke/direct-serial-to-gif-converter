@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import chalk from 'chalk';
 import stylesheet from './stylesheet';
 import distributeContent from './distributeContent';
 
@@ -37,7 +36,6 @@ class ListTable extends Component {
   render() {
     const {
       boxLabel,
-      checkMark,
       columnStyles,
       height,
       left,
@@ -46,12 +44,7 @@ class ListTable extends Component {
       width,
     } = this.props;
 
-    const items = values.map(({ data }, itemIndex) => {
-      if (checkMark) {
-        data.unshift(checkMark ? `[${itemIndex === this.getCurrentItemIndex() ? chalk.white(checkMark) : ' '}] ` : '');
-      }
-      return data;
-    });
+    const items = values.map(({ data }) => data);
 
     return (
       <list
@@ -87,7 +80,6 @@ class ListTable extends Component {
 
 ListTable.propTypes = {
   boxLabel: PropTypes.string.isRequired,
-  checkMark: PropTypes.string,
   columnStyles: PropTypes.array,
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   left: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -101,7 +93,6 @@ ListTable.propTypes = {
 };
 
 ListTable.defaultProps = {
-  checkMark: '',
   columnStyles: [],
 };
 
