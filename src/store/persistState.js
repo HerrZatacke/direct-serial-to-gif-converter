@@ -4,7 +4,7 @@ import Datastore from 'nedb';
 class PeristState {
   constructor() {
     this.db = new Datastore({ filename: path.join(process.cwd(), 'db', 'state.db'), autoload: true });
-    this.compactDelay = null;
+    this.db.persistence.setAutocompactionInterval(5000);
 
     this.db.ensureIndex({
       fieldName: 'key',
@@ -36,16 +36,11 @@ class PeristState {
           payload: `Data persist Error: ${error}`,
         });
       } else {
-        global.clearTimeout(this.compactDelay);
-        this.compactDelay = global.setTimeout(() => {
-          store.dispatch({
-            type: 'LOG_MESSAGE',
-            payload: 'Data persisted',
-          });
-          this.db.persistence.compactDatafile();
-        }, 1000);
+        store.dispatch({
+          type: 'LOG_MESSAGE',
+          payload: 'Data persisted',
+        });
       }
-
     });
   }
 
