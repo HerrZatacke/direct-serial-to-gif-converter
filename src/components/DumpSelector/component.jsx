@@ -1,7 +1,6 @@
 import path from 'path';
 import React from 'react';
 import PropTypes from 'prop-types';
-// import stylesheet from './stylesheet';
 import ListTable from '../ListTable';
 
 const DumpSelector = ({
@@ -16,7 +15,6 @@ const DumpSelector = ({
     values={dumpDirContent}
     value=".."
     width="60%"
-    content={dumpDirContent.join('\n')}
     onSelect={(value) => {
       updateDumpDir(path.join(dumpDir, value));
     }}
