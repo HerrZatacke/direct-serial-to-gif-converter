@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 const mapStateToProps = state => ({
   availablePorts: state.availablePorts,
   portConfig: state.config.portConfig,
-  width: state.screenSize.width,
 });
 
 const mapDispatchToProps = dispatch => ({

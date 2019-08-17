@@ -6,6 +6,7 @@ const SavedSelector = ({
   imageList,
   selectedImages,
   setSelectedImages,
+  width,
 }) => (
   <MultiListTable
     height="100%-1"
@@ -16,7 +17,7 @@ const SavedSelector = ({
       data: [hash, created],
     }))}
     value=".."
-    width="60%"
+    width={width}
     selectedValues={selectedImages}
     onSelect={(values) => {
       setSelectedImages(values);
@@ -32,6 +33,7 @@ SavedSelector.propTypes = {
   })).isRequired,
   selectedImages: PropTypes.arrayOf(PropTypes.string).isRequired,
   setSelectedImages: PropTypes.func.isRequired,
+  width: PropTypes.number.isRequired,
 };
 
 export default SavedSelector;

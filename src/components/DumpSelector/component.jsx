@@ -8,6 +8,7 @@ const DumpSelector = ({
   dumpDir,
   dumpDirContent,
   updateDumpDir,
+  width,
 }) => (
   <ListTable
     height="100%-1"
@@ -15,7 +16,7 @@ const DumpSelector = ({
     left={0}
     values={dumpDirContent}
     value=".."
-    width="60%"
+    width={width}
     columnStyles={columnStyles}
     onSelect={(value) => {
       updateDumpDir(path.join(dumpDir, value));
@@ -30,6 +31,7 @@ DumpSelector.propTypes = {
     value: PropTypes.string.isRequired,
   })).isRequired,
   updateDumpDir: PropTypes.func.isRequired,
+  width: PropTypes.number.isRequired,
 };
 
 export default DumpSelector;

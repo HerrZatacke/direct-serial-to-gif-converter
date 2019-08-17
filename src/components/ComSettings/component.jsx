@@ -8,10 +8,6 @@ class ComSettings extends Component {
   constructor(props) {
     super(props);
     this.node = null;
-
-    this.state = {
-      width: 100,
-    };
   }
 
   componentDidMount() {
@@ -23,6 +19,7 @@ class ComSettings extends Component {
       availablePorts,
       portConfig,
       updatePortConfig,
+      width,
     } = this.props;
 
     const lists = [
@@ -59,28 +56,22 @@ class ComSettings extends Component {
     ];
 
     const height = 2 + Math.min(10, Math.max(...lists.map(({ values }) => values.length)));
-    let remainingWidth = this.state.width;
+    let remainingWidth = width;
 
     return (
       <Fragment>
         <box
           class={stylesheet.box}
           height={height}
+          width={width}
           ref={(node) => {
             this.node = node || this.node;
-            if (this.node.width === this.state.width) {
-              return;
-            }
-
-            this.setState({
-              width: this.node.width,
-            });
           }}
         >
           {
             lists.map((item, index) => {
               const elementWidth = Math.ceil(remainingWidth / (lists.length - index));
-              const elementOffset = this.state.width - remainingWidth;
+              const elementOffset = width - remainingWidth;
               remainingWidth -= elementWidth;
 
               return (
@@ -108,6 +99,7 @@ class ComSettings extends Component {
         </box>
         <box
           top={height}
+          width={width - 1}
           class={stylesheet.infobox}
           content={`${portConfig.comName} ${portConfig.baudRate} ${portConfig.dataBits} ${portConfig.stopBits} ${portConfig.parity}`}
         />
@@ -120,6 +112,7 @@ ComSettings.propTypes = {
   availablePorts: PropTypes.array.isRequired,
   portConfig: PropTypes.object.isRequired,
   updatePortConfig: PropTypes.func.isRequired,
+  width: PropTypes.number.isRequired,
 };
 
 export default ComSettings;

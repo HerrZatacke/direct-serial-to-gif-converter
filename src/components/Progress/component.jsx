@@ -15,6 +15,7 @@ class Console extends Component {
         ref={(node) => {
           this.node = node;
         }}
+        width={this.props.width}
         class={stylesheet}
       />
     );
@@ -24,6 +25,7 @@ class Console extends Component {
 
 Console.propTypes = {
   value: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
 };
 
 export default Console;
