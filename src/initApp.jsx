@@ -12,7 +12,7 @@ const initApp = (store, screen) => {
     });
   });
 
-  const keys = ['escape', ...mainMenuButtons.filter(({ moduleId }) => moduleId).map(({ key }) => `f${key}`)];
+  const keys = ['escape', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11', 'f12'];
 
   screen.key(keys, (_, key) => {
     const fIndex = parseInt(key.name.replace(/[^\d]/g, ''), 10) - 1;

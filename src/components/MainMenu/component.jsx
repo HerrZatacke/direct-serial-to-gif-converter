@@ -7,18 +7,18 @@ const MainMenu = ({ buttons, handleMenu, inactive }) => (
     class={stylesheet.layout}
     keys
   >
-    { buttons.map(({ text, key }, index) => {
+    { buttons.map(({ text }, index) => {
 
       const boxOptions = {
         tags: true,
         class: stylesheet.button,
-        content: `{#000000-bg}{#ffffff-fg} ${key}{/}${text}`,
+        content: `{#000000-bg}{#ffffff-fg} ${index + 1}{/}${text}`,
       };
 
       return (
         (!inactive) ? (
           <button
-            key={key}
+            key={index}
             {...boxOptions}
             onPress={() => {
               handleMenu(index);
@@ -26,7 +26,7 @@ const MainMenu = ({ buttons, handleMenu, inactive }) => (
           />
         ) : (
           <box
-            key={key}
+            key={index}
             {...boxOptions}
           />
         )
