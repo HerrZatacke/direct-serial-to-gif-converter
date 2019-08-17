@@ -8,6 +8,7 @@ import imageList from './reducers/imageListReducer';
 import lines from './reducers/linesReducer';
 import logMessages from './reducers/logMessagesReducer';
 import screenSize from './reducers/screenSizeReducer';
+import selectedImages from './reducers/selectedImagesReducer';
 
 export default combineReducers({
   activeModule,
@@ -19,4 +20,5 @@ export default combineReducers({
   lines,
   logMessages,
   screenSize,
+  selectedImages,
 });

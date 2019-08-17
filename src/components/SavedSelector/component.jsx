@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ListTable from '../ListTable';
+import MultiListTable from '../MultiListTable';
 
 const SavedSelector = ({
   imageList,
+  selectedImages,
+  setSelectedImages,
 }) => (
-  <ListTable
+  <MultiListTable
     height="80%"
     boxLabel={`Saved Images (${imageList.length})`}
     left={0}
@@ -15,9 +17,9 @@ const SavedSelector = ({
     }))}
     value=".."
     width="60%"
-    onSelect={(value) => {
-      // eslint-disable-next-line no-console
-      console.log(value);
+    selectedValues={selectedImages}
+    onSelect={(values) => {
+      setSelectedImages(values);
     }}
   />
 );
@@ -28,6 +30,8 @@ SavedSelector.propTypes = {
     hash: PropTypes.string.isRequired,
     created: PropTypes.string.isRequired,
   })).isRequired,
+  selectedImages: PropTypes.arrayOf(PropTypes.string).isRequired,
+  setSelectedImages: PropTypes.func.isRequired,
 };
 
 export default SavedSelector;
