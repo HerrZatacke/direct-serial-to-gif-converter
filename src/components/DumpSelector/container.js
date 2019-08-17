@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 const mapStateToProps = state => ({
   dumpDir: state.dumpDir,
   dumpDirContent: state.dumpDirContent,
+  width: state.screenSize.columns.left,
 });
 
 const mapDispatchToProps = dispatch => ({

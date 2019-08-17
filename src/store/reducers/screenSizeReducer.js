@@ -1,4 +1,4 @@
-const screenSizeReducer = (screenSize = { width: null, height: null }, action) => {
+const screenSizeReducer = (screenSize = {}, action) => {
   switch (action.type) {
     case 'SCREEN_RESIZE':
       return action.payload;

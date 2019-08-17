@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 const mapStateToProps = state => ({
   imageList: state.imageList,
   selectedImages: state.selectedImages,
+  width: state.screenSize.columns.left,
 });
 
 const mapDispatchToProps = dispatch => ({

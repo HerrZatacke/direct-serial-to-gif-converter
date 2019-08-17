@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import mainMenuButtons from '../../mainMenuButtons';
 
-const mapStateToProps = () => ({
+const mapStateToProps = state => ({
   buttons: mainMenuButtons,
+  inactive: !!state.activeModule,
 });
 
 const mapDispatchToProps = dispatch => ({
