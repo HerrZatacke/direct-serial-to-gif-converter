@@ -15,7 +15,10 @@ class ImageDb {
     });
   }
 
-  updateDb(binary) {
+  update(binary) {
+    if (binary.length !== 360) {
+      return Promise.reject(new Error('invalid image data'));
+    }
 
     const hasher = crypto.createHash('sha1');
     hasher.update(binary.join('\n'));
@@ -53,6 +56,18 @@ class ImageDb {
             resolve(`inserted ${document._id}`);
           });
         }
+      });
+    });
+  }
+
+  list() {
+    return new Promise((resolve, reject) => {
+      this.db.find({}).sort({ created: 1 }).exec((error, documents) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+        resolve(documents);
       });
     });
   }

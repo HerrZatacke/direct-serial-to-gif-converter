@@ -2,6 +2,13 @@ import PortHandler from '../tools/serial/PortHandler';
 import DumpHandler from '../tools/fs/DumpHandler';
 import ImageDb from './ImageDb';
 
+const logDbError = store => (error) => {
+  store.dispatch({
+    type: 'LOG_MESSAGE',
+    payload: error.message,
+  });
+};
+
 const middleware = (store) => {
 
   const portHandler = new PortHandler(store.dispatch);
@@ -33,6 +40,16 @@ const middleware = (store) => {
           case 'RAW_DUMPS':
             dumpHandler.open(state.dumpDir);
             break;
+          case 'IMAGE_LIST':
+            imageDb.list()
+              .then((storedImages) => {
+                store.dispatch({
+                  type: 'SET_IMAGE_LIST',
+                  payload: storedImages,
+                });
+              })
+              .catch(logDbError(store));
+            break;
           default:
         }
         break;
@@ -40,19 +57,14 @@ const middleware = (store) => {
         dumpHandler.open(action.payload);
         break;
       case 'RAW_IMAGE_COMPLETE':
-        imageDb.updateDb(action.payload)
+        imageDb.update(action.payload)
           .then((message) => {
             store.dispatch({
               type: 'LOG_MESSAGE',
               payload: message,
             });
           })
-          .catch((error) => {
-            store.dispatch({
-              type: 'LOG_MESSAGE',
-              payload: error.message,
-            });
-          });
+          .catch(logDbError(store));
 
         // throw a gif into the raw folder, just to have somethiong to look at...
         // const tmpDir = path.join(process.cwd(), 'out', 'raw', 'gif');
