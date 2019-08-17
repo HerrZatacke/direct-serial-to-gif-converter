@@ -14,6 +14,11 @@ const buttons = [
     key: 3,
     moduleId: 'RAW_DUMPS',
   },
+  {
+    text: 'Saved Images',
+    key: 4,
+    moduleId: 'IMAGE_LIST',
+  },
   // {
   //   text: 'Export',
   //   key: 4,

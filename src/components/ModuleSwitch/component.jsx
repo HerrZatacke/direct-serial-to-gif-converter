@@ -4,6 +4,7 @@ import ComSettings from '../ComSettings';
 import DumpSelector from '../DumpSelector';
 import Progress from '../Progress';
 import MainMenu from '../MainMenu';
+import SavedSelector from '../SavedSelector';
 
 const ModuleSwitch = ({ activeModule }) => {
   switch (activeModule) {
@@ -25,6 +26,13 @@ const ModuleSwitch = ({ activeModule }) => {
       return (
         <Fragment>
           <DumpSelector />
+          <MainMenu inactive />
+        </Fragment>
+      );
+    case 'IMAGE_LIST':
+      return (
+        <Fragment>
+          <SavedSelector />
           <MainMenu inactive />
         </Fragment>
       );
