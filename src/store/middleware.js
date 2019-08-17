@@ -52,6 +52,9 @@ const middleware = (store) => {
               .catch(logDbError(store));
             break;
           case 'EXPORT_SELECTED':
+            if (!state.selectedImages.length) {
+              break;
+            }
             exportImages(state)
               .then((writtenFiles) => {
                 store.dispatch({
