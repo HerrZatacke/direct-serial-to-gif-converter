@@ -1,20 +1,3 @@
-const columnStyles = [
-  {
-    label: 'Type',
-    align: 'right',
-    maxWidth: 6,
-  },
-  {
-    label: 'Name',
-    align: 'left',
-  },
-  {
-    label: 'Size',
-    align: 'right',
-    minWidth: 10,
-  },
-];
-
 const shrinkToFit = (sizes, maxOverallWidth) => {
   if (maxOverallWidth <= sizes.length) {
     return sizes;
@@ -44,7 +27,7 @@ const padAlign = (align, size, text) => {
   }
 };
 
-const distributeContent = (data, max) => {
+const distributeContent = (data, max, columnStyles = []) => {
   if (!data.length) {
     return [];
   }
@@ -58,7 +41,7 @@ const distributeContent = (data, max) => {
   ), []);
 
   const sizes = maxSizes.map((colLongest, index) => {
-    const { maxWidth = 500, minWidth = 1 } = columnStyles[index];
+    const { maxWidth = 500, minWidth = 1 } = (columnStyles[index] || {});
     return Math.min(maxWidth, Math.max(minWidth, colLongest));
   });
 
@@ -66,7 +49,7 @@ const distributeContent = (data, max) => {
 
   const padded = data.map(row => (
     row.map((cellText, index) => {
-      const { align = 'left' } = columnStyles[index];
+      const { align = 'left' } = (columnStyles[index] || {});
       const size = shrunkSizes[index];
       return padAlign(align, size, cellText);
     })

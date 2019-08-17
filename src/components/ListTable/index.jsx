@@ -35,9 +35,10 @@ class ListTable extends Component {
 
   render() {
     const {
-      checkMark,
-      height,
       boxLabel,
+      checkMark,
+      columnStyles,
+      height,
       left,
       onSelect,
       values,
@@ -65,7 +66,7 @@ class ListTable extends Component {
         }}
         class={stylesheet}
         label={boxLabel}
-        items={distributeContent(items, this.state.width)}
+        items={distributeContent(items, this.state.width, columnStyles)}
         height={height}
         width={width}
         left={left}
@@ -86,6 +87,7 @@ class ListTable extends Component {
 ListTable.propTypes = {
   boxLabel: PropTypes.string.isRequired,
   checkMark: PropTypes.string,
+  columnStyles: PropTypes.array,
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   left: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onSelect: PropTypes.func.isRequired,
@@ -99,6 +101,7 @@ ListTable.propTypes = {
 
 ListTable.defaultProps = {
   checkMark: '',
+  columnStyles: [],
 };
 
 export default ListTable;
