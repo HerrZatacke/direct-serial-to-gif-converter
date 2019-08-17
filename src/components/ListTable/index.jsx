@@ -16,6 +16,7 @@ class ListTable extends Component {
 
   componentDidMount() {
     this.node.select(this.getCurrentItemIndex());
+    this.node.focus();
   }
 
   componentDidUpdate(prevProps) {

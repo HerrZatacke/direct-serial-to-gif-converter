@@ -14,6 +14,10 @@ class ComSettings extends Component {
     };
   }
 
+  componentDidMount() {
+    this.node.children[0].focus();
+  }
+
   render() {
     const {
       availablePorts,

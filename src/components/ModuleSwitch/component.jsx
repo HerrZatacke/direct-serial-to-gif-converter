@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ComSettings from '../ComSettings';
 import DumpSelector from '../DumpSelector';
@@ -6,40 +6,37 @@ import Progress from '../Progress';
 import MainMenu from '../MainMenu';
 import SavedSelector from '../SavedSelector';
 
-const ModuleSwitch = ({ activeModule }) => {
+const getComponent = (activeModule) => {
   switch (activeModule) {
     case 'OPEN_PORT':
-      return (
-        <Fragment>
-          <Progress />
-          <MainMenu inactive />
-        </Fragment>
-      );
+      return Progress;
     case 'CONFIG_PORT':
-      return (
-        <Fragment>
-          <ComSettings />
-          <MainMenu inactive />
-        </Fragment>
-      );
+      return ComSettings;
     case 'RAW_DUMPS':
-      return (
-        <Fragment>
-          <DumpSelector />
-          <MainMenu inactive />
-        </Fragment>
-      );
+      return DumpSelector;
     case 'IMAGE_LIST':
-      return (
-        <Fragment>
-          <SavedSelector />
-          <MainMenu inactive />
-        </Fragment>
-      );
+      return SavedSelector;
     default:
-      return <MainMenu />;
+      return null;
   }
 };
+
+class ModuleSwitch extends Component {
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.activeModule !== nextProps.activeModule;
+  }
+
+  render() {
+    const ActiveComponent = getComponent(this.props.activeModule);
+    return (
+      <Fragment>
+        {ActiveComponent ? <ActiveComponent /> : null}
+        <MainMenu inactive={!!ActiveComponent} />
+      </Fragment>
+    );
+  }
+}
 
 ModuleSwitch.propTypes = {
   activeModule: PropTypes.string.isRequired,

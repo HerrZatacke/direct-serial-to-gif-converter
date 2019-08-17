@@ -8,10 +8,6 @@ class Console extends Component {
     this.node = null;
   }
 
-  // componentDidUpdate() {
-  //   this.node.add(this.props.messages[0]);
-  // }
-
   render() {
     return (
       <progressbar

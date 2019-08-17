@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import path from 'path';
 import crypto from 'crypto';
 import Datastore from 'nedb';
@@ -41,20 +40,20 @@ class ImageDb {
         };
 
         if (foundDoc) {
-          this.db.update({ hash }, newDoc, { returnUpdatedDocs: true }, (updateError, num, document) => {
+          this.db.update({ hash }, newDoc, (updateError) => {
             if (updateError) {
               reject(updateError);
               return;
             }
-            resolve(`updated ${document._id}`);
+            resolve(`updated ${hash}`);
           });
         } else {
-          this.db.insert(newDoc, (insertError, document) => {
+          this.db.insert(newDoc, (insertError) => {
             if (insertError) {
               reject(insertError);
               return;
             }
-            resolve(`inserted ${document._id}`);
+            resolve(`inserted ${hash}`);
           });
         }
       });
