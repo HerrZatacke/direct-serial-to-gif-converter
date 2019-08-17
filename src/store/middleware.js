@@ -1,6 +1,7 @@
 import PortHandler from '../tools/serial/PortHandler';
 import DumpHandler from '../tools/fs/DumpHandler';
 import ImageDb from './ImageDb';
+import exportImages from './middleware/exportImages';
 
 const logDbError = store => (error) => {
   store.dispatch({
@@ -50,6 +51,16 @@ const middleware = (store) => {
               })
               .catch(logDbError(store));
             break;
+          case 'EXPORT_SELECTED':
+            exportImages(state)
+              .then((writtenFiles) => {
+                store.dispatch({
+                  type: 'LOG_MESSAGE',
+                  payload: `${writtenFiles.length} files written`,
+                });
+              })
+              .catch(logDbError(store));
+            break;
           default:
         }
         break;
@@ -65,14 +76,6 @@ const middleware = (store) => {
             });
           })
           .catch(logDbError(store));
-
-        // throw a gif into the raw folder, just to have somethiong to look at...
-        // const tmpDir = path.join(process.cwd(), 'out', 'raw', 'gif');
-        // mkdirp.sync(path.join(tmpDir));
-        // const tmpFile = path.join(tmpDir, `${hash}.gif`);
-        // fs.writeFileSync(tmpFile, createGif(getImageFromLines(action.payload), { scale: 4 }));
-        // open(tmpFile);
-        // });
         break;
       default:
         break;

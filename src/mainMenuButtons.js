@@ -19,6 +19,11 @@ const buttons = [
     key: 4,
     moduleId: 'IMAGE_LIST',
   },
+  {
+    text: 'Export Selected Images',
+    key: 5,
+    moduleId: 'EXPORT_SELECTED',
+  },
   // {
   //   text: 'Export',
   //   key: 4,
