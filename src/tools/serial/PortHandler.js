@@ -9,9 +9,7 @@ class PortHandler {
     this.dispatchFunction = dispatch;
     this.port = null;
     this.lineHandler = new LineHandler(dispatch);
-    this.outDir = path.join(process.cwd(), 'out');
-    this.rawDir = path.join(this.outDir, 'raw');
-    this.rawWriteStream = fs.createWriteStream(path.join(this.rawDir, 'rawInput.txt'), {
+    this.rawWriteStream = fs.createWriteStream(path.join(process.cwd(), 'db', 'rawInput.txt'), {
       flags: 'a',
       encoding: 'utf8',
     });
