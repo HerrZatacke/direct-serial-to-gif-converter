@@ -45,6 +45,9 @@ const padAlign = (align, size, text) => {
 };
 
 const distributeContent = (data, max) => {
+  if (!data.length) {
+    return [];
+  }
 
   const maxOverallWidth = max - (data[0].length * 3);
 
