@@ -1,17 +1,12 @@
-import path from 'path';
-import fs from 'fs';
-import mkdirp from 'mkdirp';
-import open from 'open';
 import PortHandler from '../tools/serial/PortHandler';
 import DumpHandler from '../tools/fs/DumpHandler';
-import saveRawImage from './middleware/saveRawImage';
-import getImageFromLines from '../tools/decode/getImageFromLines';
-import createGif from '../tools/imageCreation/createGif';
+import ImageDb from './ImageDb';
 
 const middleware = (store) => {
 
   const portHandler = new PortHandler(store.dispatch);
   const dumpHandler = new DumpHandler(store.dispatch);
+  const imageDb = new ImageDb();
 
   return next => (action) => {
 
@@ -45,20 +40,27 @@ const middleware = (store) => {
         dumpHandler.open(action.payload);
         break;
       case 'RAW_IMAGE_COMPLETE':
-        saveRawImage(action.payload)
-          .then(({ filename, hash }) => {
+        imageDb.updateDb(action.payload)
+          .then((message) => {
             store.dispatch({
               type: 'LOG_MESSAGE',
-              payload: `${path.basename(filename)} created`,
+              payload: message,
             });
-
-            // throw a gif into the raw folder, just to have somethiong to look at...
-            const tmpDir = path.join(process.cwd(), 'out', 'raw', 'gif');
-            mkdirp.sync(path.join(tmpDir));
-            const tmpFile = path.join(tmpDir, `${hash}.gif`);
-            fs.writeFileSync(tmpFile, createGif(getImageFromLines(action.payload), { scale: 4 }));
-            open(tmpFile);
+          })
+          .catch((error) => {
+            store.dispatch({
+              type: 'LOG_MESSAGE',
+              payload: error.message,
+            });
           });
+
+        // throw a gif into the raw folder, just to have somethiong to look at...
+        // const tmpDir = path.join(process.cwd(), 'out', 'raw', 'gif');
+        // mkdirp.sync(path.join(tmpDir));
+        // const tmpFile = path.join(tmpDir, `${hash}.gif`);
+        // fs.writeFileSync(tmpFile, createGif(getImageFromLines(action.payload), { scale: 4 }));
+        // open(tmpFile);
+        // });
         break;
       default:
         break;
