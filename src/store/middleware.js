@@ -37,12 +37,12 @@ const middleware = (store) => {
     const state = store.getState();
     // console.log(state);
 
-    // if (
-    //   action.type === 'MENU_KEYPRESS'
-    // ) {
-    //   // eslint-disable-next-line no-console
-    //   console.log(action);
-    // }
+    if (
+      action.type === 'TRIGGERED_SUB_ACTION'
+    ) {
+      // eslint-disable-next-line no-console
+      console.log(action);
+    }
 
     switch (action.type) {
       case 'MENU_KEYPRESS':

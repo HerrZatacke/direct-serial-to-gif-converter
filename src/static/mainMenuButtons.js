@@ -24,6 +24,11 @@ const buttons = [
         menuAction: 'EXPORT_SELECTED',
         sendKey: 'f5',
       },
+      {
+        text: 'Export Options',
+        menuAction: 'EXPORT_OPTIONS',
+        sendKey: 'f6',
+      },
     ],
   },
 ];

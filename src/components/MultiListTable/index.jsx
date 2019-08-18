@@ -25,6 +25,9 @@ class MultiListTable extends Component {
     if (JSON.stringify(prevProps.values) !== JSON.stringify(this.props.values)) {
       this.node.select(0);
     }
+    if (prevProps.inactive !== this.props.inactive) {
+      this.node.keyable = !this.props.inactive;
+    }
   }
 
   isSelected(value) {
@@ -49,6 +52,7 @@ class MultiListTable extends Component {
       boxLabel,
       columnStyles,
       height,
+      inactive,
       left,
       values,
       width,
@@ -76,7 +80,7 @@ class MultiListTable extends Component {
         height={height}
         width={width}
         left={left}
-        keys
+        keys={!inactive}
         onSelect={this.handleSelect}
         onResize={() => {
           this.setState({
@@ -92,6 +96,7 @@ MultiListTable.propTypes = {
   boxLabel: PropTypes.string.isRequired,
   columnStyles: PropTypes.array,
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  inactive: PropTypes.bool,
   left: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onSelect: PropTypes.func.isRequired,
   selectedValues: PropTypes.array.isRequired,
@@ -104,6 +109,7 @@ MultiListTable.propTypes = {
 
 MultiListTable.defaultProps = {
   columnStyles: [],
+  inactive: false,
 };
 
 export default MultiListTable;

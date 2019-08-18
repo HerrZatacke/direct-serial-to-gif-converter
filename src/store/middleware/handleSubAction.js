@@ -18,6 +18,13 @@ const handleSubAction = ({
         })
         .catch(logDbError);
       break;
+    // possible other cases that open overlayed windows...
+    case 'EXPORT_OPTIONS':
+      dispatch({
+        type: 'SET_SUB_MODULE',
+        payload: actionName,
+      });
+      break;
     default:
       break;
   }
