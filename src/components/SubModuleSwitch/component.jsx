@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ExportOptions from '../ExportOptions/component';
+import ExportOptions from '../ExportOptions';
 
 const SubModuleSwitch = (props) => {
   switch (props.activeSubModule) {
