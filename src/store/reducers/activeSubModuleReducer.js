@@ -4,6 +4,13 @@ const activeSubModuleReducer = (activeSubModule = '', action) => {
       return action.payload;
     case 'SET_MENU_OPTIONS':
       return '';
+    case 'TRIGGERED_SUB_ACTION':
+      switch (action.payload) {
+        case 'SINGLE_FILES':
+          return '';
+        default:
+          return activeSubModule;
+      }
     default:
       return activeSubModule;
   }
