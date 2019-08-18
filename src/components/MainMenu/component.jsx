@@ -1,39 +1,68 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import stylesheet from './stylesheet';
 
-const MainMenu = ({ buttons, handleMenu, inactive }) => (
-  <layout
-    class={stylesheet.layout}
-    keys
-  >
-    { buttons.map(({ text }, index) => {
+class MainMenu extends Component {
 
-      const boxOptions = {
-        tags: true,
-        class: stylesheet.button,
-        content: `{#000000-bg}{#ffffff-fg} ${index + 1}{/}${text}`,
-      };
+  constructor(props) {
+    super(props);
+    this.node = null;
+  }
 
-      return (
-        (!inactive) ? (
-          <button
-            key={index}
-            {...boxOptions}
-            onPress={() => {
-              handleMenu(index);
-            }}
-          />
-        ) : (
-          <box
-            key={index}
-            {...boxOptions}
-          />
-        )
-      );
-    })}
-  </layout>
-);
+  componentDidMount() {
+    this.node.children[0].focus();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.inactive && !this.props.inactive) {
+      this.node.children[0].focus();
+    }
+  }
+
+  render() {
+    const {
+      buttons,
+      handleMenu,
+      inactive,
+    } = this.props;
+
+    return (
+      <layout
+        class={stylesheet.layout}
+        ref={(node) => {
+          this.node = node;
+        }}
+        keys
+      >
+        {buttons.map(({ text }, index) => {
+
+          const boxOptions = {
+            tags: true,
+            class: stylesheet.button,
+            content: `{#000000-bg}{#ffffff-fg} ${index + 1}{/}${text}`,
+          };
+
+          return (
+            (!inactive) ? (
+              <button
+                key={`button-${text}`}
+                {...boxOptions}
+                onPress={() => {
+                  handleMenu(index);
+                }}
+              />
+            ) : (
+              <box
+                key={`inactive-button-${text}`}
+                {...boxOptions}
+              />
+            )
+          );
+        })}
+      </layout>
+    );
+  }
+}
 
 MainMenu.propTypes = {
   buttons: PropTypes.array.isRequired,

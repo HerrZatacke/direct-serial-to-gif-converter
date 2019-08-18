@@ -2,6 +2,7 @@ import PortHandler from '../tools/serial/PortHandler';
 import DumpHandler from '../tools/fs/DumpHandler';
 import ImageDb from './ImageDb';
 import exportImages from './middleware/exportImages';
+import getHandleMenuKey from './middleware/handleMenuKey';
 
 const logDbError = store => (error) => {
   store.dispatch({
@@ -15,20 +16,16 @@ const middleware = (store) => {
   const portHandler = new PortHandler(store.dispatch);
   const dumpHandler = new DumpHandler(store.dispatch);
   const imageDb = new ImageDb();
+  const handleMenuKey = getHandleMenuKey(store.dispatch);
 
   return next => (action) => {
 
     const state = store.getState();
     // console.log(state);
 
-    if (
-      action.type !== 'LINE_RECEIVED'
-    ) {
-      // eslint-disable-next-line no-console
-      console.log(action);
-    }
-
     switch (action.type) {
+      case 'MENU_KEYPRESS':
+        return handleMenuKey(action.payload);
       case 'SET_ACTIVE_MODULE':
         portHandler.closePort();
         switch (action.payload) {

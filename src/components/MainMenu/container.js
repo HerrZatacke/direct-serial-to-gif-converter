@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import mainMenuButtons from '../../mainMenuButtons';
+import mainMenuButtons from '../../static/mainMenuButtons';
 
 const mapStateToProps = state => ({
   buttons: mainMenuButtons,
@@ -11,8 +11,8 @@ const mapDispatchToProps = dispatch => ({
     const pressed = mainMenuButtons[index];
     if (pressed.moduleId) {
       dispatch({
-        type: 'SET_ACTIVE_MODULE',
-        payload: pressed.moduleId,
+        type: 'MENU_KEYPRESS',
+        payload: pressed.sendKey,
       });
     }
   },
