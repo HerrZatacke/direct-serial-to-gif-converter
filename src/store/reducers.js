@@ -7,6 +7,7 @@ import dumpDirContent from './reducers/dumpDirContentReducer';
 import imageList from './reducers/imageListReducer';
 import lines from './reducers/linesReducer';
 import logMessages from './reducers/logMessagesReducer';
+import menuOptions from './reducers/menuOptionsReducer';
 import screenSize from './reducers/screenSizeReducer';
 import selectedImages from './reducers/selectedImagesReducer';
 
@@ -19,6 +20,7 @@ export default combineReducers({
   imageList,
   lines,
   logMessages,
+  menuOptions,
   screenSize,
   selectedImages,
 });

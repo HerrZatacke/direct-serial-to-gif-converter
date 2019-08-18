@@ -34,8 +34,7 @@ class MainMenu extends Component {
         }}
         keys
       >
-        {buttons.map(({ text }, index) => {
-
+        {buttons.map(({ text, sendKey }, index) => {
           const boxOptions = {
             tags: true,
             class: stylesheet.button,
@@ -48,7 +47,7 @@ class MainMenu extends Component {
                 key={`button-${text}`}
                 {...boxOptions}
                 onPress={() => {
-                  handleMenu(index);
+                  handleMenu(sendKey);
                 }}
               />
             ) : (

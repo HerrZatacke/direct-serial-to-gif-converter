@@ -19,7 +19,7 @@ const initApp = (store, screen) => {
   screen.key(keys, (_, key) => {
     const shouldReRender = store.dispatch({
       type: 'MENU_KEYPRESS',
-      payload: key,
+      payload: key.name,
     });
 
     if (shouldReRender) {

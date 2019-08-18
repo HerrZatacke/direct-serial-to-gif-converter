@@ -1,24 +1,23 @@
 import mainMenuButtons from '../../static/mainMenuButtons';
 
 const handleMenuKey = dispatch => (key) => {
-  if (key.name === 'escape') {
+  if (key === 'escape') {
     dispatch({
       type: 'SET_ACTIVE_MODULE',
       payload: '',
     });
-  } else {
-    const fIndex = parseInt(key.name.replace(/[^\d]/g, ''), 10) - 1;
-    const activeModule = mainMenuButtons[fIndex];
-
-    if (!activeModule || !activeModule.moduleId) {
-      return false;
-    }
-
-    dispatch({
-      type: 'SET_ACTIVE_MODULE',
-      payload: activeModule.moduleId,
-    });
+    return true;
   }
+
+  const menuOptions = mainMenuButtons.map(option => ({
+    ...option,
+    isActive: option.sendKey === key,
+  }));
+
+  dispatch({
+    type: 'SET_MENU_OPTIONS',
+    payload: menuOptions,
+  });
 
   return true;
 };
