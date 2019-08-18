@@ -5,7 +5,7 @@ const handleSubAction = ({
   dispatch,
 }) => (actionName, state) => {
   switch (actionName) {
-    case 'EXPORT_SELECTED':
+    case 'SINGLE_FILES':
       if (!state.selectedImages.length) {
         break;
       }

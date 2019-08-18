@@ -20,14 +20,9 @@ const buttons = [
     sendKey: 'f4',
     actions: [
       {
-        text: 'Export Selected Images',
-        menuAction: 'EXPORT_SELECTED',
-        sendKey: 'f5',
-      },
-      {
         text: 'Export Options',
         menuAction: 'EXPORT_OPTIONS',
-        sendKey: 'f6',
+        sendKey: 'f5',
       },
     ],
   },
