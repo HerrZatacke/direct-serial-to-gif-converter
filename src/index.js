@@ -3,6 +3,10 @@ import './tools/inspectLogger';
 import getStore from './store';
 import initApp from './initApp';
 
+// clean the debug window
+// eslint-disable-next-line no-console
+console.clear();
+
 const screen = blessed.screen({
   autoPadding: true,
   smartCSR: true,
