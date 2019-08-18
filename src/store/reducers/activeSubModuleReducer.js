@@ -7,6 +7,7 @@ const activeSubModuleReducer = (activeSubModule = '', action) => {
     case 'TRIGGERED_SUB_ACTION':
       switch (action.payload) {
         case 'SINGLE_FILES':
+        case 'ANIMATION':
           return '';
         default:
           return activeSubModule;
