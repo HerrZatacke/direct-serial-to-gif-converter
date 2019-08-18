@@ -1,8 +1,11 @@
 import React from 'react';
-import { render } from 'react-blessed';
+import blessed from 'neo-blessed';
+import { createBlessedRenderer } from 'react-blessed';
 import App from './components/App';
 import mainMenuButtons from './mainMenuButtons';
 import sizeAndGrid from './tools/screen/sizeAndGrid';
+
+const render = createBlessedRenderer(blessed);
 
 const initApp = (store, screen) => {
   screen.on('resize', () => {

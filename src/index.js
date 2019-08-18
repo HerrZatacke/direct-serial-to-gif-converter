@@ -1,4 +1,4 @@
-import blessed from 'blessed';
+import blessed from 'neo-blessed';
 import './tools/inspectLogger';
 import getStore from './store';
 import initApp from './initApp';
