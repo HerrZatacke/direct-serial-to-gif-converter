@@ -11,6 +11,9 @@ class List extends Component {
 
   componentDidMount() {
     this.node.select(this.getCurrentItemIndex());
+    if (this.props.focus) {
+      this.node.focus();
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -57,7 +60,10 @@ class List extends Component {
         left={left}
         keys
         onSelect={(_, selectedIndex) => {
-          onSelect(values[selectedIndex].value);
+          const selected = values[selectedIndex];
+          if (selected) {
+            onSelect(selected.value);
+          }
         }}
       />
     );
@@ -67,6 +73,7 @@ class List extends Component {
 List.propTypes = {
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   boxLabel: PropTypes.string.isRequired,
+  focus: PropTypes.bool,
   left: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onSelect: PropTypes.func.isRequired,
   checkMark: PropTypes.string,
@@ -80,6 +87,7 @@ List.propTypes = {
 
 List.defaultProps = {
   checkMark: '',
+  focus: false,
 };
 
 export default List;
