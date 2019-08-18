@@ -27,6 +27,9 @@ class MultiListTable extends Component {
     }
     if (prevProps.inactive !== this.props.inactive) {
       this.node.keyable = !this.props.inactive;
+      if (!this.props.inactive) {
+        this.node.focus();
+      }
     }
   }
 
