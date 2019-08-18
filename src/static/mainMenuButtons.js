@@ -18,11 +18,13 @@ const buttons = [
     text: 'Saved Images',
     menuAction: 'IMAGE_LIST',
     sendKey: 'f4',
-  },
-  {
-    text: 'Export Selected Images',
-    menuAction: 'EXPORT_SELECTED',
-    sendKey: 'f5',
+    actions: [
+      {
+        text: 'Export Selected Images',
+        menuAction: 'EXPORT_SELECTED',
+        sendKey: 'f5',
+      },
+    ],
   },
 ];
 

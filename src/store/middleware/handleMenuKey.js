@@ -1,10 +1,21 @@
 import mainMenuButtons from '../../static/mainMenuButtons';
 
-const handleMenuKey = dispatch => (key) => {
+const handleMenuKey = dispatch => (key, { activeModule }) => {
   if (key === 'escape') {
     dispatch({
-      type: 'SET_ACTIVE_MODULE',
-      payload: '',
+      type: 'SET_MENU_OPTIONS',
+      payload: mainMenuButtons,
+    });
+    return true;
+  }
+
+  const currentActive = mainMenuButtons.find(({ menuAction }) => menuAction === activeModule) || false;
+  const triggeredSub = (currentActive.actions || []).find(({ sendKey }) => sendKey === key);
+
+  if (triggeredSub) {
+    dispatch({
+      type: 'TRIGGERED_SUB_ACTION',
+      payload: triggeredSub.menuAction,
     });
     return true;
   }
@@ -14,9 +25,16 @@ const handleMenuKey = dispatch => (key) => {
     isActive: option.sendKey === key,
   }));
 
+  const activeOption = menuOptions.find(({ isActive }) => isActive);
+  const subActions = activeOption && activeOption.actions ? activeOption.actions : [];
+
+  if (!activeOption) {
+    return false;
+  }
+
   dispatch({
     type: 'SET_MENU_OPTIONS',
-    payload: menuOptions,
+    payload: [...menuOptions, ...subActions],
   });
 
   return true;

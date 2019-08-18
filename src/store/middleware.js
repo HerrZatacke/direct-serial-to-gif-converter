@@ -3,6 +3,7 @@ import DumpHandler from '../tools/fs/DumpHandler';
 import ImageDb from './ImageDb';
 import getHandleMenuKey from './middleware/handleMenuKey';
 import getHandleActiveModuleChange from './middleware/handleActiveModuleChange';
+import getHandleSubAction from './middleware/handleSubAction';
 
 const middleware = (store) => {
 
@@ -26,6 +27,11 @@ const middleware = (store) => {
     dispatch: store.dispatch,
   });
 
+  const handleSubAction = getHandleSubAction({
+    logDbError,
+    dispatch: store.dispatch,
+  });
+
   return next => (action) => {
 
     const state = store.getState();
@@ -40,9 +46,12 @@ const middleware = (store) => {
 
     switch (action.type) {
       case 'MENU_KEYPRESS':
-        return handleMenuKey(action.payload);
+        return handleMenuKey(action.payload, state);
       case 'SET_MENU_OPTIONS':
         handleActiveModuleChange(action.payload, state);
+        break;
+      case 'TRIGGERED_SUB_ACTION':
+        handleSubAction(action.payload, state);
         break;
       case 'SELECT_DUMP_DIR_FILE':
         dumpHandler.open(action.payload);

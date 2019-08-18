@@ -1,5 +1,3 @@
-import exportImages from './exportImages';
-
 const handleActiveModuleChange = ({
   portHandler,
   dumpHandler,
@@ -31,19 +29,6 @@ const handleActiveModuleChange = ({
           dispatch({
             type: 'SET_IMAGE_LIST',
             payload: storedImages,
-          });
-        })
-        .catch(logDbError);
-      break;
-    case 'EXPORT_SELECTED':
-      if (!state.selectedImages.length) {
-        break;
-      }
-      exportImages(state)
-        .then((writtenFiles) => {
-          dispatch({
-            type: 'LOG_MESSAGE',
-            payload: `${writtenFiles.length} files written`,
           });
         })
         .catch(logDbError);
