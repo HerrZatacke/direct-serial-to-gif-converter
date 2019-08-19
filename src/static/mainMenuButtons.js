@@ -15,8 +15,8 @@ const buttons = [
     sendKey: 'f3',
   },
   {
-    text: 'Saved Images',
-    menuAction: 'IMAGE_LIST',
+    text: 'Palettes',
+    menuAction: 'PALETTES',
     sendKey: 'f4',
     actions: [
       {
@@ -27,9 +27,16 @@ const buttons = [
     ],
   },
   {
-    text: 'Palettes',
-    menuAction: 'PALETTES',
+    text: 'Saved Images',
+    menuAction: 'IMAGE_LIST',
     sendKey: 'f5',
+    actions: [
+      {
+        text: 'Export Options',
+        menuAction: 'EXPORT_OPTIONS',
+        sendKey: 'f6',
+      },
+    ],
   },
 ];
 
