@@ -1,17 +1,31 @@
-const fs = require('fs');
-const path = require('path');
-const DataHandler = require('./DataHandler');
+import blessed from 'neo-blessed';
+import './tools/inspectLogger';
+import getStore from './store';
+import initApp from './initApp';
 
-const dataHandler = new DataHandler();
+// clean the debug window
+// eslint-disable-next-line no-console
+console.clear();
 
-fs.readFile(path.join(process.cwd(), 'dump.txt'), { encoding: 'utf8' }, (error, data) => {
-  if (error) {
-    console.error(error);
-    process.exit();
-  }
-  dataHandler.push(data.split('\n'));
+const screen = blessed.screen({
+  autoPadding: true,
+  smartCSR: true,
+  tabSize: 2,
+  dockBorders: true,
+  cursor: {
+    artificial: true,
+    shape: 'block',
+    blink: true,
+    color: '#ffffff',
+  },
 });
 
-process.on('beforeExit', () => {
-  dataHandler.done();
+screen.key('C-c', () => process.exit(0));
+screen.key(['tab', 'right'], screen.focusNext);
+screen.key(['left'], screen.focusPrev);
+
+getStore(screen).then((store) => {
+  global.store = store;
+  global.screen = screen;
+  initApp(store, screen);
 });

@@ -12,7 +12,6 @@ Serial mode can be started with `npm run listen`
     "baudRate": 19200,
     "dataBits": 7,
     "stopBits": 1,
-    "autoOpen": true,
     "parity": "even"
   }
 }

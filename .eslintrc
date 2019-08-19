@@ -1,12 +1,9 @@
 {
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module"
-  },
+  "parser": "babel-eslint",
   "extends": "airbnb",
   "env": {
-    "browser": true,
-    "jest": true
+    "node": true,
+    "browser": false
   },
   "globals": {
     "CONFIG": true
@@ -24,6 +21,9 @@
     "react/jsx-indent": [
       2
     ],
+    "react/no-unknown-property": [
+      "off"
+    ],
     "react/jsx-indent-props": [
       2
     ],
@@ -37,7 +37,6 @@
         ]
       }
     ],
-    "jsx-a11y/label-has-for": "off",
     "react/no-array-index-key": "off",
     "class-methods-use-this": "off",
     "no-console": [
