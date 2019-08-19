@@ -1,10 +1,9 @@
-import fs from 'fs';
 import path from 'path';
 import mkdirp from 'mkdirp';
 import PQueue from 'p-queue';
 import open from 'open';
 import getImageFromLines from '../../tools/decode/getImageFromLines';
-import createGif from '../../tools/imageCreation/createGif';
+import createPng from '../../tools/imageCreation/createPng';
 // import transformImageValues from '../../tools/decode/transformImageValues';
 
 const exportImages = ({ selectedImages, imageList }) => {
@@ -18,7 +17,7 @@ const exportImages = ({ selectedImages, imageList }) => {
 
   return queue.addAll(imagesToExport.map(({ hash, binary }) => () => (
     new Promise((resolve, reject) => {
-      const tmpFile = path.join(tmpDir, `${hash}.gif`);
+      const tmpFile = path.join(tmpDir, `${hash}.png`);
 
       // const pixelMapBonW = ['░░', '▒▒', '▓▓', '██'];
       // const pixelMapWonB = ['██', '▓▓', '▒▒', '░░'];
@@ -26,13 +25,12 @@ const exportImages = ({ selectedImages, imageList }) => {
       // fs.writeFileSync(`${tmpFile}_wonb.txt`, transformImageValues(getImageFromLines(binary), pixelMapWonB));
       // fs.writeFileSync(`${tmpFile}_bonw.txt`, transformImageValues(getImageFromLines(binary), pixelMapBonW));
 
-      fs.writeFile(tmpFile, createGif(getImageFromLines(binary), { scale: 4 }), (error) => {
-        if (error) {
-          reject(error);
-          return;
-        }
+      try {
+        createPng(tmpFile, getImageFromLines(binary), { scale: 4 });
         resolve(tmpFile);
-      });
+      } catch (error) {
+        reject(error);
+      }
     })
   )))
     .then((files) => {

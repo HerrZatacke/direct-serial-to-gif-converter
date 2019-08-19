@@ -1,9 +1,8 @@
-import fs from 'fs';
 import path from 'path';
 import mkdirp from 'mkdirp';
 import open from 'open';
 import getImageFromLines from '../../tools/decode/getImageFromLines';
-import createGif from '../../tools/imageCreation/createGif';
+import createPng from '../../tools/imageCreation/createPng';
 import createRGBPalette from '../../tools/imageCreation/createRGBPalette';
 
 const exportAnimation = ({ selectedImages, imageList }) => {
@@ -28,18 +27,15 @@ const exportAnimation = ({ selectedImages, imageList }) => {
   return new Promise((resolve, reject) => {
     // const framesToExport = imageList.filter(({ hash }) => selectedImages.includes(hash));
 
-    const rawGif = createGif(mergedRGB, { scale: 4, palette: createRGBPalette() });
-    const tmpFile = path.join(tmpDir, 'rgb.gif');
+    const tmpFile = path.join(tmpDir, 'rgb.png');
 
-    fs.writeFile(tmpFile, rawGif, (error) => {
-      if (error) {
-        reject(error);
-        return;
-      }
+    try {
+      createPng(tmpFile, mergedRGB, { scale: 4, palette: createRGBPalette() });
       open(tmpDir);
       resolve(tmpFile);
-    });
-
+    } catch (error) {
+      reject(error);
+    }
   });
 };
 
