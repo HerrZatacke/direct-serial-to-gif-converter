@@ -5,7 +5,6 @@ import open from 'open';
 import getImageFromLines from '../../tools/decode/getImageFromLines';
 import createPng from '../../tools/imageCreation/createPng';
 import palettes from '../../../res/palettes';
-// import transformImageValues from '../../tools/decode/transformImageValues';
 
 const exportImages = ({ selectedImages, selectedPalettes, imageList }) => {
 

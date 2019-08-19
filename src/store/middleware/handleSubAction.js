@@ -28,7 +28,7 @@ const handleSubAction = ({
         .then((frames) => {
           dispatch({
             type: 'LOG_MESSAGE',
-            payload: `Animation with ${frames} frames done`,
+            payload: `${frames.length} animations with ${frames[0]} frames done`,
           });
         })
         .catch(logDbError);
@@ -39,7 +39,6 @@ const handleSubAction = ({
       }
       exportRGB(state)
         .then((debug) => {
-          console.log(debug);
           dispatch({
             type: 'LOG_MESSAGE',
             payload: 'RGB Image exported',
