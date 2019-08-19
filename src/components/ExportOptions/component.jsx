@@ -4,7 +4,9 @@ import stylesheet from './stylesheet';
 import List from '../List';
 
 const ExportOptions = ({
+  imageCount,
   menuOptions,
+  paletteCount,
   selectMenuOption,
 }) => (
   <box
@@ -12,7 +14,7 @@ const ExportOptions = ({
     class={stylesheet}
   >
     <List
-      boxLabel="Export Options"
+      boxLabel={`Export Options (${imageCount} Images / ${paletteCount} Palettes)`}
       value="SINGLE_FILES"
       values={menuOptions}
       height="100%"
@@ -27,7 +29,9 @@ const ExportOptions = ({
 );
 
 ExportOptions.propTypes = {
+  imageCount: PropTypes.number.isRequired,
   menuOptions: PropTypes.array.isRequired,
+  paletteCount: PropTypes.number.isRequired,
   selectMenuOption: PropTypes.func.isRequired,
 };
 

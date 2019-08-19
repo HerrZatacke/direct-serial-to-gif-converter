@@ -15,8 +15,10 @@ const menuOptions = [
   },
 ];
 
-const mapStateToProps = () => ({
+const mapStateToProps = state => ({
   menuOptions,
+  paletteCount: state.selectedPalettes.length,
+  imageCount: state.selectedImages.length,
 });
 
 const mapDispatchToProps = dispatch => ({
