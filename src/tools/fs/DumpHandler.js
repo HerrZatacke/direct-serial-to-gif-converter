@@ -42,8 +42,6 @@ class DumpHandler {
 
       const dumpType = getDumpType(lines);
 
-      console.log(dumpType);
-
       switch (dumpType) {
         case 'INVALID':
           this.dispatchFunction({
