@@ -22,9 +22,14 @@ const buttons = [
       {
         text: 'Export Options',
         menuAction: 'EXPORT_OPTIONS',
-        sendKey: 'f5',
+        sendKey: 'f6',
       },
     ],
+  },
+  {
+    text: 'Palettes',
+    menuAction: 'PALETTES',
+    sendKey: 'f5',
   },
 ];
 

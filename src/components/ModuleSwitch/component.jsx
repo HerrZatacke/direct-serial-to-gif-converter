@@ -4,6 +4,7 @@ import ComSettings from '../ComSettings';
 import DumpSelector from '../DumpSelector';
 import Progress from '../Progress';
 import SavedSelector from '../SavedSelector';
+import PalettesSelector from '../PalettesSelector';
 
 const ModuleSwitch = (props) => {
   switch (props.activeModule) {
@@ -15,6 +16,8 @@ const ModuleSwitch = (props) => {
       return <DumpSelector />;
     case 'IMAGE_LIST':
       return <SavedSelector />;
+    case 'PALETTES':
+      return <PalettesSelector />;
     default:
       return null;
   }

@@ -11,6 +11,7 @@ import logMessages from './reducers/logMessagesReducer';
 import menuOptions from './reducers/menuOptionsReducer';
 import screenSize from './reducers/screenSizeReducer';
 import selectedImages from './reducers/selectedImagesReducer';
+import selectedPalettes from './reducers/selectedPalettesReducer';
 
 export default combineReducers({
   activeModule,
@@ -25,4 +26,5 @@ export default combineReducers({
   menuOptions,
   screenSize,
   selectedImages,
+  selectedPalettes,
 });
