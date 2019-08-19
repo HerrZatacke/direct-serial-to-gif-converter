@@ -1,5 +1,6 @@
 import exportImages from './exportImages';
 import exportAnimation from './exportAnimation';
+import exportRGB from './exportRGB';
 
 const handleSubAction = ({
   logDbError,
@@ -28,6 +29,20 @@ const handleSubAction = ({
           dispatch({
             type: 'LOG_MESSAGE',
             payload: `Animation with ${frames} frames done`,
+          });
+        })
+        .catch(logDbError);
+      break;
+    case 'RGB':
+      if (state.selectedImages.length !== 3) {
+        break;
+      }
+      exportRGB(state)
+        .then((debug) => {
+          console.log(debug);
+          dispatch({
+            type: 'LOG_MESSAGE',
+            payload: 'RGB Image exported',
           });
         })
         .catch(logDbError);

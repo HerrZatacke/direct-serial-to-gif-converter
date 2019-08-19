@@ -6,6 +6,7 @@ const selectedImagesReducer = (selectedImages = [], action) => {
     //   switch (action.payload) {
     //     case 'SINGLE_FILES':
     //     case 'ANIMATION':
+    //     case 'RGB':
     //       return [];
     //     default:
     //       return selectedImages;
