@@ -38,10 +38,10 @@ const handleSubAction = ({
         break;
       }
       exportRGB(state)
-        .then((debug) => {
+        .then((files) => {
           dispatch({
             type: 'LOG_MESSAGE',
-            payload: 'RGB Image exported',
+            payload: `${files.length} RGB Images exported`,
           });
         })
         .catch(logDbError);
