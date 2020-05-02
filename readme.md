@@ -15,3 +15,6 @@ It looks like a notorius commander now
 * `F4` Select one or more Palettes for rendering images
 * `F5` Select one or more Images to render
 * `F6` Choose to export selected images as animation, single files or combine into a RGB-Image (if exactly three images are selected) 
+
+## References
+https://github.com/mofosyne/arduino-gameboy-printer-emulator
