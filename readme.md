@@ -1,6 +1,10 @@
 # GB printer direct serial to gif converter
-It looks like a notorius commander now
 
+## Note
+This Project will be replaced by [Gameboy Printer Web](https://github.com/HerrZatacke/gb-printer-web) and [Websocket GBP Emulator](https://github.com/HerrZatacke/websocket-gbp-emulator).
+
+## Description
+It looks like a notorius commander now
 * No more config files required (use `F2` menu instead)
 * Transferred images are stored internally without duplicates
 * Imagetypes which can be generated:
