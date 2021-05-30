@@ -55,6 +55,6 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.9.1",
     "rimraf": "^2.6.2",
-    "ws": "^6.0.0"
+    "ws": "^7.4.6"
   }
 }
